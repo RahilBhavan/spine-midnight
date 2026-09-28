@@ -1,0 +1,2365 @@
+{
+ "generated_at": 1790617201,
+ "late_bins_min": [
+  0,
+  5,
+  10,
+  15,
+  20,
+  25,
+  30,
+  35,
+  40,
+  45,
+  50,
+  55,
+  60
+ ],
+ "maturities": {
+  "2026-07-09": {
+   "markets": 2,
+   "positions": 9,
+   "matured": true,
+   "outcomes": {
+    "repaid": 8,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+   ],
+   "roll_events": 0
+  },
+  "2026-07-16": {
+   "markets": 2,
+   "positions": 15,
+   "matured": true,
+   "outcomes": {
+    "repaid": 5,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 10,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 10,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    9,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-07-17": {
+   "markets": 1,
+   "positions": 4,
+   "matured": true,
+   "outcomes": {
+    "repaid": 3,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-07-18": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-07-22": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-07-23": {
+   "markets": 3,
+   "positions": 13,
+   "matured": true,
+   "outcomes": {
+    "repaid": 9,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 4,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 4,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4
+   ],
+   "roll_events": 0
+  },
+  "2026-07-24": {
+   "markets": 1,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "roll_events": 0
+  },
+  "2026-07-29": {
+   "markets": 1,
+   "positions": 3,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 2,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 2,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-07-30": {
+   "markets": 7,
+   "positions": 233,
+   "matured": true,
+   "outcomes": {
+    "repaid": 153,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 80,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 127,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 80,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    12,
+    45,
+    12,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    3,
+    132
+   ],
+   "roll_events": 0
+  },
+  "2026-07-31": {
+   "markets": 7,
+   "positions": 54,
+   "matured": true,
+   "outcomes": {
+    "repaid": 35,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 13,
+    "open": 6
+   },
+   "open_at_maturity": {
+    "repaid": 14,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 13,
+    "open": 6
+   },
+   "late_minutes_hist": [
+    18,
+    1,
+    2,
+    1,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    9
+   ],
+   "roll_events": 0
+  },
+  "2026-08-04": {
+   "markets": 1,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-05": {
+   "markets": 2,
+   "positions": 4,
+   "matured": true,
+   "outcomes": {
+    "repaid": 3,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-06": {
+   "markets": 3,
+   "positions": 9,
+   "matured": true,
+   "outcomes": {
+    "repaid": 6,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 2
+   },
+   "open_at_maturity": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 2
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    3,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-08": {
+   "markets": 2,
+   "positions": 3,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+   ],
+   "roll_events": 0
+  },
+  "2026-08-09": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-12": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "roll_events": 0
+  },
+  "2026-08-13": {
+   "markets": 1,
+   "positions": 4,
+   "matured": true,
+   "outcomes": {
+    "repaid": 3,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-14": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-15": {
+   "markets": 2,
+   "positions": 3,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-16": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-19": {
+   "markets": 1,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-20": {
+   "markets": 2,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-22": {
+   "markets": 2,
+   "positions": 3,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-26": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-08-27": {
+   "markets": 4,
+   "positions": 100,
+   "matured": true,
+   "outcomes": {
+    "repaid": 91,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 8,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 3,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 8,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    1,
+    0,
+    3,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    3
+   ],
+   "roll_events": 0
+  },
+  "2026-08-28": {
+   "markets": 9,
+   "positions": 87,
+   "matured": true,
+   "outcomes": {
+    "repaid": 63,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 5,
+    "open": 19
+   },
+   "open_at_maturity": {
+    "repaid": 4,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 5,
+    "open": 19
+   },
+   "late_minutes_hist": [
+    2,
+    11,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8
+   ],
+   "roll_events": 0
+  },
+  "2026-09-03": {
+   "markets": 2,
+   "positions": 5,
+   "matured": true,
+   "outcomes": {
+    "repaid": 5,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-07": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-09": {
+   "markets": 1,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "roll_events": 0
+  },
+  "2026-09-15": {
+   "markets": 2,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-17": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-19": {
+   "markets": 1,
+   "positions": 1,
+   "matured": true,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-20": {
+   "markets": 2,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-21": {
+   "markets": 3,
+   "positions": 4,
+   "matured": true,
+   "outcomes": {
+    "repaid": 3,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-22": {
+   "markets": 1,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-23": {
+   "markets": 2,
+   "positions": 2,
+   "matured": true,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "roll_events": 0
+  },
+  "2026-09-24": {
+   "markets": 4,
+   "positions": 42,
+   "matured": true,
+   "outcomes": {
+    "repaid": 36,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 5,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 5,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    4,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "roll_events": 0
+  },
+  "2026-09-25": {
+   "markets": 11,
+   "positions": 148,
+   "matured": true,
+   "outcomes": {
+    "repaid": 124,
+    "rolled": 2,
+    "liquidated": 0,
+    "liquidated_late": 2,
+    "open": 20
+   },
+   "open_at_maturity": {
+    "repaid": 4,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 2,
+    "open": 20
+   },
+   "late_minutes_hist": [
+    11,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+   ],
+   "roll_events": 3
+  },
+  "2026-09-29": {
+   "markets": 1,
+   "positions": 2,
+   "matured": false,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-09-30": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-02": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-12": {
+   "markets": 2,
+   "positions": 2,
+   "matured": false,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-13": {
+   "markets": 2,
+   "positions": 2,
+   "matured": false,
+   "outcomes": {
+    "repaid": 2,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-15": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-22": {
+   "markets": 3,
+   "positions": 16,
+   "matured": false,
+   "outcomes": {
+    "repaid": 16,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-27": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-10-30": {
+   "markets": 8,
+   "positions": 144,
+   "matured": false,
+   "outcomes": {
+    "repaid": 39,
+    "rolled": 4,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 101
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 101
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 34
+  },
+  "2026-11-11": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-11-14": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-11-19": {
+   "markets": 3,
+   "positions": 14,
+   "matured": false,
+   "outcomes": {
+    "repaid": 12,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-11-27": {
+   "markets": 9,
+   "positions": 96,
+   "matured": false,
+   "outcomes": {
+    "repaid": 19,
+    "rolled": 1,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 76
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 76
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 3
+  },
+  "2026-12-11": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-12-17": {
+   "markets": 3,
+   "positions": 9,
+   "matured": false,
+   "outcomes": {
+    "repaid": 7,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 2
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2026-12-25": {
+   "markets": 7,
+   "positions": 44,
+   "matured": false,
+   "outcomes": {
+    "repaid": 11,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 33
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 33
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-01-09": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-01-10": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-01-29": {
+   "markets": 3,
+   "positions": 4,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 3
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 3
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-02-09": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-03-11": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-04-10": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-05-10": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-05-27": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-06-17": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-07-11": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-07-17": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 1,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 0
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2027-09-24": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  },
+  "2028-12-31": {
+   "markets": 1,
+   "positions": 1,
+   "matured": false,
+   "outcomes": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 0,
+    "open": 1
+   },
+   "late_minutes_hist": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "roll_events": 0
+  }
+ }
+}

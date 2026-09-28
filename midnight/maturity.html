@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Spine: maturity day on Morpho Midnight</title>
+<!-- Unlinked draft. Not in site/ (the refresh workflow deploys only site/), not in the nav. Publish after 2026-10-30: see MIDNIGHT.md. -->
+<link rel="stylesheet" href="../site/style.css">
+<style>
+  .bar { display: inline-block; height: 12px; background: var(--accent); vertical-align: middle; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { padding: 4px 8px; border-bottom: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Maturity day on Morpho Midnight</h1>
+  <p class="muted">Independent analysis, not affiliated with Coinbase or Morpho. Every Midnight borrow position on Base, counted by how its debt ended. Counts, not rates. Built from public event logs. Snapshot <span id="generated-at">loading</span></p>
+</header>
+<main>
+<section>
+  <h2>How positions ended, per maturity date</h2>
+  <p class="muted">Repaid: the borrower repaid or bought units back. Rolled: BlueFallbackRolling moved the debt to a Morpho Blue market. Liquidated: price liquidation (normal mode). Late: liquidated in post-maturity mode, where the liquidation bonus grows from 0 at maturity to its maximum (4.38% at 86% LLTV) one hour later. The right-hand group counts only positions that still had debt at the maturity time.</p>
+  <table id="outcomes"></table>
+</section>
+<section>
+  <h2>Minutes late, post-maturity liquidations</h2>
+  <p class="muted">Minutes between maturity and a position's first post-maturity liquidation, all matured dates. Each minute adds about 0.07 percentage points of bonus at 86% LLTV, up to 60 minutes.</p>
+  <table id="late"></table>
+</section>
+</main>
+<script>
+const OUT = ['repaid', 'rolled', 'liquidated', 'liquidated_late', 'open'];
+const HEAD = ['Repaid', 'Rolled', 'Liquidated', 'Late', 'Open'];
+fetch('../data/midnight/maturity.json').then(r => r.json()).then(d => {
+  document.getElementById('generated-at').textContent = new Date(d.generated_at * 1000).toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
+  const rows = Object.entries(d.maturities).filter(([, m]) => m.matured || m.outcomes.open < m.positions);
+  const cells = o => OUT.map(k => `<td class="n">${o[k]}</td>`).join('');
+  document.getElementById('outcomes').innerHTML =
+    `<tr><th>Maturity</th><th class="n">Markets</th><th class="n">Positions</th>${HEAD.map(h => `<th class="n">${h}</th>`).join('')}` +
+    `<th class="n">Rolls</th>${HEAD.map(h => `<th class="n">${h} (debt at T)</th>`).join('')}</tr>` +
+    rows.map(([day, m]) => `<tr><td>${day}${m.matured ? '' : ' (not yet)'}</td><td class="n">${m.markets}</td><td class="n">${m.positions}</td>` +
+      `${cells(m.outcomes)}<td class="n">${m.roll_events}</td>${cells(m.open_at_maturity)}</tr>`).join('');
+  const hist = d.late_bins_min.map((_, i) => Object.values(d.maturities).reduce((s, m) => s + (m.matured ? m.late_minutes_hist[i] : 0), 0));
+  const max = Math.max(1, ...hist);
+  document.getElementById('late').innerHTML = '<tr><th>Minutes late</th><th class="n">Positions</th><th></th></tr>' +
+    hist.map((n, i) => `<tr><td>${i === hist.length - 1 ? d.late_bins_min[i] + '+' : d.late_bins_min[i] + '-' + (d.late_bins_min[i] + 5)}</td>` +
+      `<td class="n">${n}</td><td><span class="bar" style="width:${(300 * n / max).toFixed(0)}px"></span></td></tr>`).join('');
+}).catch(() => { document.getElementById('generated-at').textContent = 'data/midnight/maturity.json missing: run python -m spine.midnight label'; });
+</script>
+</body>
+</html>
