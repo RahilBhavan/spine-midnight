@@ -1,5 +1,5 @@
 {
- "generated_at": 1790617201,
+ "generated_at": 1790620680,
  "late_bins_min": [
   0,
   5,
@@ -1628,10 +1628,10 @@
   },
   "2026-10-30": {
    "markets": 8,
-   "positions": 144,
+   "positions": 145,
    "matured": false,
    "outcomes": {
-    "repaid": 39,
+    "repaid": 40,
     "rolled": 4,
     "liquidated": 0,
     "liquidated_late": 0,
@@ -1659,7 +1659,7 @@
     0,
     0
    ],
-   "roll_events": 34
+   "roll_events": 36
   },
   "2026-11-11": {
    "markets": 1,
@@ -1772,17 +1772,17 @@
    "matured": false,
    "outcomes": {
     "repaid": 19,
-    "rolled": 1,
+    "rolled": 2,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 76
+    "open": 75
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 76
+    "open": 75
    },
    "late_minutes_hist": [
     0,
@@ -1799,7 +1799,7 @@
     0,
     0
    ],
-   "roll_events": 3
+   "roll_events": 4
   },
   "2026-12-11": {
    "markets": 1,

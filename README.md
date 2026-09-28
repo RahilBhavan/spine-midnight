@@ -2,7 +2,7 @@
 
 An independent study of how fixed-maturity loans on Morpho Midnight (Base) end: repayment, a roll into Morpho Blue, liquidation, or debt still open. It replays public contract events, checks reconstructed balances against contract state, and produces aggregate counts by maturity date.
 
-This is a **private working repository**. The September 25, 2026 maturity has been indexed and checked. The October 30 maturity and the public writeup are pending. The draft page at `midnight/maturity.html` is not deployed or linked publicly. This work is not affiliated with Coinbase or Morpho.
+This public repository contains a verified September 25, 2026 checkpoint. Across all indexed Midnight positions maturing that day, 124 repaid, 2 rolled into Morpho Blue, 2 were liquidated after maturity, and 20 remained open at the latest index (148 total). These are market-wide counts, not a Coinbase wallet breakdown. The October 30 maturity and the final two-maturity writeup remain pending. The draft page at `midnight/maturity.html` is not deployed or linked publicly. This work is not affiliated with Coinbase or Morpho.
 
 ## Reproduce the September checkpoint
 
@@ -27,8 +27,10 @@ The fetcher resumes from its saved block and uses a public RPC sweep to fill gap
 
 ## What the checks cover
 
-`spine.check_maturity` compares replayed debt and total units with live contract state, checks the aggregate borrowed value against DefiLlama, reads the actual block at maturity plus one hour, and matches rolls with Morpho Blue borrow receipts. See [MIDNIGHT.md](MIDNIGHT.md) for the runbook and publication gate.
+`spine.check_maturity` compares replayed debt and total units with live contract state, checks priced borrowed tokens against DefiLlama at the same snapshot time, reads the actual block at maturity plus one hour, and matches rolls with Morpho Blue borrow receipts. See [MIDNIGHT.md](MIDNIGHT.md) for the runbook and publication gate.
 
 Wallet tagging output and snapshots belong under `private/`, which is ignored by Git. The public aggregate has no wallet-type split. A private review and the October 30 maturity are required before publishing the page or memo.
+
+The DefiLlama price check excludes an unpriced Dummy USD Coin loan token (250,000 units at the September 28 snapshot); no USD value or risk claim is made for that token. The check prints excluded tokens explicitly.
 
 The original Morpho Blue dashboard and backtest remain in [Spine](https://github.com/RahilBhavan/spine). The code here reuses its standard-library API and wallet-tagging helpers under the MIT license.

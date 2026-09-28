@@ -10,7 +10,7 @@
    receipt) and repaid debtAssets on Midnight. Private snapshots in private/midnight/snapshots are compared when present.
 Exits 1 on any failure. Counts only, no rates."""
 import glob, json, os, sys, time
-from spine.api import MORPHO_BLUE, get_json, rpc
+from spine.api import MORPHO_BLUE, get_json, load, rpc
 from spine.fetch_midnight import ROLLING
 from spine.midnight import PRIVATE, TOTAL_UNITS, MIDNIGHT, events, label, multicall, read_debts, replay, debt_at
 
@@ -57,7 +57,11 @@ if __name__ == '__main__':
     check(not closed_bad, 'labels: %d positions, %d with outcome inconsistent with replayed debt' % (len(rows), len(closed_bad)))
 
     # 2. live state
-    tip = rpc('eth_getBlockByNumber', ['latest', False])
+    indexed_block = (load('midnight/rpc_checked') or {}).get('to')
+    if indexed_block is None:
+        raise SystemExit('no completed RPC sweep; run spine.fetch_midnight')
+    tip = rpc('eth_getBlockByNumber', [hex(indexed_block), False])
+    print('checking contract state at indexed Base block %d' % indexed_block)
     keys = sorted(pos)
     live = read_debts(keys, tip['number'])
     diff = [k for k in keys if live[k] != pos[k]['debt']]
@@ -68,15 +72,45 @@ if __name__ == '__main__':
     tdiff = [i for i in ids if tu[i] != total.get(i, 0)]
     check(not tdiff, 'live totalUnits: %d of %d markets differ from the replay' % (len(tdiff), len(ids)))
 
-    # 3. DefiLlama Base borrowed
+    # 3. Compare at DefiLlama's snapshot time; its latest snapshot can lag the RPC tip.
+    llama_data = get_json(LLAMA)['chainTvls']['Base-borrowed']
+    snapshot = llama_data['tvl'][-1]
+    snapshot_ts = snapshot['date']
+    token_snapshot = llama_data['tokens'][-1]
+    usd_snapshot = llama_data['tokensInUsd'][-1]
+    check(token_snapshot['date'] == snapshot_ts and usd_snapshot['date'] == snapshot_ts,
+          'DefiLlama token and TVL snapshots have matching timestamps')
+    _, then_total, then_bad = replay({n: [r for r in items if r['ts'] <= snapshot_ts] for n, items in ev.items()})
+    check(not then_bad, 'DefiLlama-time replay: %d Take mismatches' % len(then_bad))
     by_token = {}
     for i in ids:
-        by_token[mk[i]['loan_token']] = by_token.get(mk[i]['loan_token'], 0) + total.get(i, 0)
+        token = mk[i]['loan_token']
+        by_token[token] = by_token.get(token, 0) + then_total.get(i, 0)
     coins = get_json('https://coins.llama.fi/prices/current/' + ','.join('base:' + t for t in by_token))['coins']
-    ours = sum(u / 10 ** coins['base:' + t]['decimals'] * coins['base:' + t]['price'] for t, u in by_token.items() if 'base:' + t in coins)
-    llama = get_json(LLAMA)['currentChainTvls']['Base-borrowed']
+    ours, omitted = 0.0, []
+    for token, units in by_token.items():
+        if not units:
+            continue
+        meta = coins.get('base:' + token)
+        if not meta:
+            decimals = int(rpc('eth_call', [{'to': token, 'data': '0x313ce567'}, 'latest']), 16)
+            amount = units / 10 ** decimals
+            omitted.append((token, amount))
+            continue
+        amount = units / 10 ** meta['decimals']
+        symbol = meta['symbol']
+        snapshot_amount = token_snapshot['tokens'].get(symbol)
+        snapshot_usd = usd_snapshot['tokens'].get(symbol)
+        if snapshot_amount is None or snapshot_usd is None:
+            omitted.append((token, amount))
+            continue
+        ours += amount * snapshot_usd / snapshot_amount
+    llama = snapshot['totalLiquidityUSD']
     gap = abs(ours - llama) / llama
-    check(gap <= 0.02, 'DefiLlama Base borrowed: indexed $%.0f vs DefiLlama $%.0f, gap %.2f%% (limit 2%%)' % (ours, llama, 100 * gap))
+    if omitted:
+        skip('DefiLlama price comparison excludes unpriced loan tokens (address, units): %s' % omitted)
+    check(gap <= 0.02, 'DefiLlama priced Base borrowed at %s UTC: indexed $%.0f vs DefiLlama $%.0f, gap %.2f%% (limit 2%%)' % (
+        time.strftime('%Y-%m-%d %H:%M', time.gmtime(snapshot_ts)), ours, llama, 100 * gap))
 
     # 4. contract state at maturity + 1h
     dates = sys.argv[1:] or sorted({r['maturity_date'] for r in rows if r['matured']} | set(COINBASE_DATES))

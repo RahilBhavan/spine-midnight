@@ -29,8 +29,8 @@ The event replay does not require snapshots; they provide an independent live cr
 
 ## Publication gate
 
-1. Check every matured date. Require zero replay and live debt mismatches, zero total-unit mismatches, roll-to-Blue reconciliation, and a DefiLlama Base borrowed gap at most 2%.
+1. Check every matured date. Require zero replay and live debt mismatches, zero total-unit mismatches, roll-to-Blue reconciliation, and a DefiLlama priced-token borrowed gap at most 2% at its snapshot time. Inspect any unpriced token exclusions separately.
 2. Review the private Coinbase wallet split with Coinbase and Morpho before publishing. If a roll failed or a Coinbase wallet was liquidated at maturity, report it privately first. Sending anything requires the owner's explicit authorization.
 3. Review the aggregate for addresses or wallet-type tags. The public output is counts only, with no estimate of any party's exposure or losses.
 4. Write a one-page memo on the first two Coinbase maturities, including data sources, methods, exceptions, and limitations. Check every number against the generated aggregate.
-5. Only after those steps, publish a public page and memo. This private repository has no deployment workflow.
+5. Only after those steps, publish the final page and memo. The source repository is public; the draft page is not deployed.
