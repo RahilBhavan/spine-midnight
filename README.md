@@ -1,21 +1,58 @@
-# Maturity day on Morpho Midnight
+# Spine Midnight
+### What happens when a fixed-maturity loan comes due?
 
-An independent study of how fixed-maturity loans on Morpho Midnight (Base) end: repayment, a roll into Morpho Blue, liquidation, or debt still open. It replays public contract events, checks reconstructed balances against contract state, and produces aggregate counts by maturity date.
+An independent study of **Morpho Midnight on Base**. Spine Midnight reads public contract events, reconstructs loan balances, and counts how positions end: repayment, a roll into Morpho Blue, liquidation, or debt still open.
 
-This public repository contains a verified September 25, 2026 checkpoint. Across all indexed Midnight positions maturing that day, 124 repaid, 2 rolled into Morpho Blue, 2 were liquidated after maturity, and 20 remained open at the latest index (148 total). These are market-wide counts, not a Coinbase wallet breakdown. The October 30 maturity and the final two-maturity writeup remain pending. The draft page at `midnight/maturity.html` is not deployed or linked publicly. This work is not affiliated with Coinbase or Morpho.
+[September results](#september-checkpoint) · [How it works](#how-it-works) · [Reproduce](#reproduce-the-checkpoint) · [Research runbook](MIDNIGHT.md)
 
-## Reproduce the September checkpoint
+> **Research status:** The September 25, 2026 checkpoint is published. The October 30 maturity and final two-maturity report remain pending. This project is not affiliated with Coinbase or Morpho.
 
-Python 3.12 and `pytest` are needed for the tests; the production scripts use the standard library. From the repository root:
+## September checkpoint
+
+**148 positions · 11 markets · maturity date: September 25, 2026**
+
+| Outcome | Positions | Meaning |
+| :--- | ---: | :--- |
+| Repaid | **124** | Debt was repaid without a classified roll. |
+| Rolled into Morpho Blue | **2** | The position moved into a Morpho Blue loan. |
+| Liquidated after maturity | **2** | Liquidation occurred after the loan came due. |
+| Still open | **20** | Debt remained at the saved index. |
+| **Total** | **148** | All indexed positions for this maturity. |
+
+Source: [saved aggregate](data/midnight/maturity.json), generated **September 28, 2026 at 18:38 UTC**. These are position counts across the market, not a Coinbase wallet breakdown. They describe the saved checkpoint; they are not current balances or estimates of losses.
+
+## How it works
+
+```mermaid
+flowchart TD
+    A["Public Midnight events on Base"] --> B["Index events and fill RPC gaps"]
+    B --> C["Replay each position's debt"]
+    C --> D["Classify outcomes by maturity date"]
+    D --> E["Public aggregate counts"]
+    C --> F["Check debt and total units against contract state"]
+    D --> G["Match rolls with Morpho Blue receipts"]
+    F --> H["Verification report"]
+    G --> H
+    I["DefiLlama snapshot"] --> H
+```
+
+The fetcher resumes from its saved block. A public RPC sweep fills gaps in the Blockscout event index. The replay then rebuilds balances from those events.
+
+The checks compare reconstructed balances with contract state at the indexed block. They also check historical debt at maturity plus one hour and match roll transactions with Morpho Blue borrow receipts.
+
+## Reproduce the checkpoint
+
+Use **Python 3.12**. Production scripts use the Python standard library; tests require `pytest`.
 
 ```sh
+git clone https://github.com/RahilBhavan/spine-midnight.git
+cd spine-midnight
 python3 -m venv .venv
 .venv/bin/python -m pip install pytest
 .venv/bin/python -m pytest -q tests
-.venv/bin/python -m spine.check_maturity 2026-09-25
 ```
 
-The live check needs access to public Base RPC, DefiLlama, and a current event index. Refresh and rebuild the aggregate with:
+To refresh the public event index, rebuild the September aggregate, and run the live checks:
 
 ```sh
 .venv/bin/python -m spine.fetch_midnight
@@ -23,14 +60,45 @@ The live check needs access to public Base RPC, DefiLlama, and a current event i
 .venv/bin/python -m spine.check_maturity 2026-09-25
 ```
 
-The fetcher resumes from its saved block and uses a public RPC sweep to fill gaps left by Blockscout. `data/midnight/` contains generated public chain data; edit the producer, not these files. Raw on-chain integers are stored as JSON strings. To preview the draft locally, run `.venv/bin/python -m http.server 8000` and open `/midnight/maturity.html`.
+Live checks need public Base RPC and DefiLlama access. Historical checks need an RPC that can read past contract state. A skipped check is not a successful verification.
 
-## What the checks cover
+## What is checked?
 
-`spine.check_maturity` compares replayed debt and total units with live contract state, checks priced borrowed tokens against DefiLlama at the same snapshot time, reads the actual block at maturity plus one hour, and matches rolls with Morpho Blue borrow receipts. See [MIDNIGHT.md](MIDNIGHT.md) for the runbook and publication gate.
+| Check | Evidence |
+| :--- | :--- |
+| Event replay | Reconstructed debt and total units agree with the indexed events. |
+| Contract state | Replayed debt and total units match the indexed Base block. |
+| Maturity timing | Historical debt is checked at maturity plus one hour. |
+| Rolls | Midnight roll transactions match Morpho Blue borrow receipts. |
+| Priced borrowed tokens | Values are compared with DefiLlama at its snapshot time. |
 
-Wallet tagging output and snapshots belong under `private/`, which is ignored by Git. The public aggregate has no wallet-type split. A private review and the October 30 maturity are required before publishing the page or memo.
+The DefiLlama check excludes an unpriced Dummy USD Coin loan token: **250,000 units at the September 28 snapshot**. The checker prints these exclusions. This study assigns no USD value or risk estimate to that token.
 
-The DefiLlama price check excludes an unpriced Dummy USD Coin loan token (250,000 units at the September 28 snapshot); no USD value or risk claim is made for that token. The check prints excluded tokens explicitly.
+See [the runbook](MIDNIGHT.md) for commands, snapshot timing, and the publication gate.
 
-The original Morpho Blue dashboard and backtest remain in [Spine](https://github.com/RahilBhavan/spine). The code here reuses its standard-library API and wallet-tagging helpers under the MIT license.
+## Explore the repository
+
+| Path | Purpose |
+| :--- | :--- |
+| [`spine/fetch_midnight.py`](spine/fetch_midnight.py) | Fetch public events and complete the RPC sweep. |
+| [`spine/midnight.py`](spine/midnight.py) | Replay balances and classify maturity outcomes. |
+| [`spine/check_maturity.py`](spine/check_maturity.py) | Check the replay against independent data. |
+| [`data/midnight/`](data/midnight/) | Saved public event data and aggregate results. |
+| [`tests/test_midnight.py`](tests/test_midnight.py) | Tests for the maturity logic. |
+| [`MIDNIGHT.md`](MIDNIGHT.md) | Research runbook and publication requirements. |
+
+Generated chain data belongs in `data/midnight/`. Change the producer rather than editing generated files. Raw on-chain integers are stored as JSON strings.
+
+## Scope and next checkpoint
+
+- **Published:** September 25 aggregate checkpoint and reproducible research code.
+- **Pending:** October 30 maturity and the final two-maturity writeup.
+- **Private:** Wallet tags and snapshots under the ignored `private/` directory.
+- **Draft:** The local HTML page is not deployed. The page and final memo require the runbook's review and publication checks.
+
+Public results contain aggregate counts and no wallet-type split. They do not estimate any party's exposure or losses.
+
+The original Morpho Blue dashboard and liquidation backtest live in [Spine](https://github.com/RahilBhavan/spine). This repository reuses its API and wallet-tagging helpers.
+
+[MIT license](LICENSE)
+
