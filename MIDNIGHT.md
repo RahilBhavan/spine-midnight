@@ -12,7 +12,7 @@ This repository indexes Morpho Midnight loans on Base and labels the outcome of 
 | `python -m spine.midnight tag` | `private/midnight/coinbase_split.json` | Private; never commit |
 | `python -m spine.check_maturity [YYYY-MM-DD ...]` | PASS/FAIL checks; no file | Verification |
 
-Prefix each command with `.venv/bin/` when using a virtual environment. `private/` is gitignored. The draft page is at `midnight/maturity.html`; it reads aggregate data from `data/midnight/maturity.json` when served from the repository root. It has `noindex` and is not deployed.
+Prefix each command with `.venv/bin/` when using a virtual environment. Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check compares the index with DefiLlama's latest snapshot, so it fails against an old index. On 2026-10-21, the committed 2026-09-28 index showed a 34.23% gap there while every other check passed. `private/` is gitignored. The draft page is at `midnight/maturity.html`; it reads aggregate data from `data/midnight/maturity.json` when served from the repository root. It has `noindex` and is not deployed.
 
 ## October 30 maturity
 
