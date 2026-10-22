@@ -132,9 +132,9 @@ def fetch_event(name):
     return items
 
 
-def fill_gaps(ev, step=2000):
+def fill_gaps(ev, step=int(os.environ.get('RPC_LOGS_STEP') or 2000)):
     """Blockscout's index has holes (a Take in block 48635200 is missing from it entirely), so we sweep the public RPC's
-    eth_getLogs (2000-block cap) for every topic on both contracts and merge what Blockscout lacks. Incremental:
+    eth_getLogs (2000-block cap; RPC_LOGS_STEP=10000 suits dRPC and Alchemy) for every topic on both contracts and merge what Blockscout lacks. Incremental:
     data/midnight/rpc_checked.json holds the last block swept. Returns {event: logs added}."""
     names = {topic0: name for name, (_, topic0, _) in EVENTS.items()}
     frm = (load('midnight/rpc_checked') or {'to': FROM_BLOCK})['to']
@@ -151,7 +151,7 @@ def fill_gaps(ev, step=2000):
     get = lambda b: rpc('eth_getLogs', [{'address': [MIDNIGHT, ROLLING], 'topics': [list(names)], 'fromBlock': hex(b),
                                           'toBlock': hex(min(b + step - 1, tip))}])
     starts = list(range(frm, tip + 1, step))
-    with ThreadPoolExecutor(8) as pool:  # ~1700 windows for a full sweep; 8 in flight keeps the public RPC happy
+    with ThreadPoolExecutor(int(os.environ.get('RPC_THREADS') or 8)) as pool:  # ~1700 windows for a full sweep; 8 in flight keeps the public RPC happy
         for k in range(0, len(starts), 200):
             for logs in pool.map(get, starts[k:k + 200]):
                 for l in logs:

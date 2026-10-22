@@ -2,7 +2,7 @@
 import json, os, sys, time, datetime, urllib.request, urllib.parse, urllib.error
 
 MORPHO = 'https://blue-api.morpho.org/graphql'
-BASE_RPC = 'https://mainnet.base.org'
+BASE_RPC = os.environ.get('BASE_RPC_URL') or 'https://mainnet.base.org'  # set BASE_RPC_URL to an archive RPC (Alchemy, QuickNode, dRPC)
 COINBASE = 'https://api.exchange.coinbase.com'
 CHAIN = 8453
 MORPHO_BLUE = '0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb'
@@ -107,11 +107,20 @@ def graphql(query, variables=None):
     return r['data']
 
 
-def rpc(method, params, url=BASE_RPC):
-    r = _post(url, {'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': params})
-    if 'error' in r:
-        raise RuntimeError(r['error'])
-    return r['result']
+def rate_limited(error):
+    """JSON-RPC errors that public RPCs return inside an HTTP 200 when throttling (mainnet.base.org: -32011)."""
+    msg = str(error.get('message', '')).lower()
+    return error.get('code') in (-32005, -32011, 429) or 'limit reached' in msg or 'too many' in msg or 'rate limit' in msg
+
+
+def rpc(method, params, url=BASE_RPC, retries=6):
+    for i in range(retries):
+        r = _post(url, {'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': params})
+        if 'error' not in r:
+            return r['result']
+        if not rate_limited(r['error']) or i == retries - 1:
+            raise RuntimeError(r['error'])
+        time.sleep(2 * 2 ** i)
 
 
 def coinbase_get(path, **params):
