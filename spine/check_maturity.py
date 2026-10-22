@@ -3,7 +3,8 @@
 
 1. Replay: every Take's totalUnitsDelta matches the credit replay; each position has one outcome, at most dust debt if closed.
 2. Live state: debt(id, user) and totalUnits(id) read now over the public RPC equal the replay.
-3. DefiLlama: indexed Base borrowed (sum of totalUnits, the adapter's own definition) within 2% of api.llama.fi.
+3. DefiLlama: indexed Base borrowed (totalUnits minus withdrawable at DefiLlama's snapshot block, the adapter's own
+   definition since it began subtracting withdrawable) within 2% of api.llama.fi.
 4. Per maturity, after maturity + 1h: debt(id, user) at the maturity + 1h block (historical eth_call; Base blocks are 2s)
    equals the replay, and we count closed-labeled positions still holding debt then. Skips until the date has passed.
 5. Rolls: each Roll's tx borrowed debtAssets + incentiveAssets on Morpho Blue for the user (Blue Borrow log in the
@@ -16,6 +17,7 @@ from spine.midnight import PRIVATE, TOTAL_UNITS, MIDNIGHT, debt_at, dust_units, 
 
 LLAMA = 'https://api.llama.fi/protocol/morpho-midnight'
 BLUE_BORROW = '0x570954540bed6b1304a87dfe815a5eda4a648f7097a16240dcd85c9b5fd42a43'
+WITHDRAWABLE = '7cf43d8c'  # withdrawable(bytes32), per 4byte.directory and openchain
 COINBASE_DATES = ['2026-09-25', '2026-10-30']
 fails = []
 
@@ -82,10 +84,14 @@ if __name__ == '__main__':
           'DefiLlama token and TVL snapshots have matching timestamps')
     _, then_total, then_bad = replay({n: [r for r in items if r['ts'] <= snapshot_ts] for n, items in ev.items()})
     check(not then_bad, 'DefiLlama-time replay: %d Take mismatches' % len(then_bad))
+    # The adapter's borrowed is totalUnits - withdrawable (repaid assets lenders have not withdrawn); withdrawable is
+    # not in the events, so read it at the block of DefiLlama's snapshot (historical eth_call).
+    snap_block = hex(block_at(snapshot_ts, int(tip['number'], 16)))
+    wd = dict(zip(ids, (int(v or '0', 16) for v in multicall([(MIDNIGHT, WITHDRAWABLE + i[2:]) for i in ids], snap_block))))
     by_token = {}
     for i in ids:
         token = mk[i]['loan_token']
-        by_token[token] = by_token.get(token, 0) + then_total.get(i, 0)
+        by_token[token] = by_token.get(token, 0) + then_total.get(i, 0) - wd[i]
     coins = get_json('https://coins.llama.fi/prices/current/' + ','.join('base:' + t for t in by_token))['coins']
     ours, omitted = 0.0, []
     for token, units in by_token.items():
