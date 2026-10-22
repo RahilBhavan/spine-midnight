@@ -79,7 +79,7 @@ def get_logs(address, topic0, frm):
             wait = int(e.headers.get('x-ratelimit-reset') or 0) / 1000 if e.code == 429 else 0
             if wait > MAX_WAIT:
                 raise Throttled('blockscout blocked for %.0f min' % (wait / 60))
-            if e.code >= 500:
+            if e.code >= 500 or e.code == 403:  # 403 = Cloudflare bot challenge; retrying never clears it
                 raise Throttled('blockscout returned HTTP %d' % e.code)
             print('  blockscout %d, sleeping %.0fs' % (e.code, max(wait, 2 ** i)), flush=True)
             time.sleep(max(wait, 2 ** i) + 5)

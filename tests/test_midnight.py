@@ -71,9 +71,10 @@ def test_block_at_uses_chain_timestamps(monkeypatch):
     assert check_maturity.block_at(120, 5) == 5
 
 
-def test_blockscout_server_error_uses_rpc_fallback(monkeypatch):
+@pytest.mark.parametrize('code', [500, 403])
+def test_blockscout_server_error_uses_rpc_fallback(monkeypatch, code):
     def fail(_req, timeout):
-        raise urllib.error.HTTPError('https://base.blockscout.com', 500, 'server error', {}, BytesIO())
+        raise urllib.error.HTTPError('https://base.blockscout.com', code, 'blocked', {}, BytesIO())
     monkeypatch.setattr(fetch_midnight.urllib.request, 'urlopen', fail)
     monkeypatch.setattr(fetch_midnight.time, 'sleep', lambda _seconds: None)
     with pytest.raises(fetch_midnight.Throttled):
