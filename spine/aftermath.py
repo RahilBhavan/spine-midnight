@@ -19,7 +19,7 @@ from concurrent.futures import ThreadPoolExecutor
 from spine.api import MARKETS, MORPHO_BLUE, rpc
 from spine.check_maturity import block_at
 from spine.cohort import SCOPE
-from spine.midnight import USDC, events, label, private_dir, replay
+from spine.midnight import USDC, events, label, max_lif, private_dir, replay
 from spine.tag_coinbase import tag_chunk, word
 
 CBBTC = '0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf'
@@ -67,6 +67,21 @@ def liquidity(owing, balances_at_T, balances_before):
                 covered_debts_usd_at_maturity_above_1usd=sorted(round(d / 1e6, 2) for u, d in above if balances_at_T[u][0] >= d),
                 debt_usd_total=round(sum(d for _, d in owing) / 1e6, 2),
                 usdc_usd_total_at_maturity=round(sum(balances_at_T[u][0] for u, _ in owing) / 1e6, 2))
+
+
+ORACLE_PRICE = 'a035b1fe'  # IOracle.price(): loan per collateral, scaled 1e36 (Morpho)
+
+
+def observed_lif(seized, repaid_units, oracle_price):
+    """Liquidation incentive factor actually paid: value of collateral seized (at the market oracle) / debt repaid."""
+    return seized * oracle_price / 10 ** 36 / repaid_units if repaid_units else None
+
+
+def ramp_fit(points, max_lif, windows=(15, 60)):
+    """points: [(minutes past maturity, observed LIF)]. Mean absolute error of a linear ramp from 1 to max_lif over
+    each window (minutes), so the documented 60-minute ramp can be compared with a ~15-minute one."""
+    pred = lambda m, w: 1 + (max_lif - 1) * min(max(m, 0), w) / w
+    return {w: round(sum(abs(l - pred(m, w)) for m, l in points) / len(points), 6) for w in windows} if points else {}
 
 
 def fisher_two_sided(a, b, c, d):
@@ -130,8 +145,20 @@ def run(day, ev=None):
     owing = [(r['user'], int(r['debt_at_maturity'])) for r in rows if r['outcome'] == 'liquidated_late' and int(r['debt_at_maturity']) > 0]
     late = [u for u, _ in owing]
     B = liquidity(owing, balances(late, bT), balances(late, b24))
+    mk = next(m for m in ev['MarketCreated'] if m['id'] == market)
+    pts = []
+    for x in ev['Liquidate']:
+        if x['id'] == market and x['post_maturity'] and int(x['repaid_units']) >= 10 ** 6:  # above $1, where rounding is negligible
+            c = next(c for c in mk['collaterals'] if c['token'] == x['collateral'])
+            px = int(rpc('eth_call', [{'to': c['oracle'], 'data': '0x' + ORACLE_PRICE}, hex(x['block'])]), 16)
+            pts.append(((x['ts'] - T) / 60, observed_lif(int(x['seized']), int(x['repaid_units']), px)))
+    c0 = mk['collaterals'][0]
+    mlif = max_lif(int(c0['lltv']), int(c0['cursor']))  # a plain factor, e.g. 1.04384
+    P = dict(liquidations_above_1usd=len(pts), max_lif=round(mlif, 5),
+             points=[dict(minutes=round(m, 1), observed_penalty_pct=round(100 * (l - 1), 3)) for m, l in sorted(pts)],
+             mean_abs_error_by_ramp_minutes=ramp_fit(pts, mlif))
     return dict(maturity_date=day, market=market, maturity_ts=T, maturity_block=bT, minus_24h_block=b24,
-                window_end_block=end_block, window_end_ts=last_ts, reborrow=A, liquidity=B,
+                window_end_block=end_block, window_end_ts=last_ts, reborrow=A, liquidity=B, penalty_ramp=P,
                 notes=['Addresses, not people: one person may own several addresses.',
                        'Re-borrow = a Midnight borrow in any market or a Blue cbBTC/USDC Borrow on behalf of the address, strictly after maturity, up to the window end.',
                        'Onchain USDC is a lower bound on available funds: Coinbase may hold customer USDC off-chain.'])
@@ -153,7 +180,13 @@ def markdown(rep):
                                                          a['reborrowed_blue'], a['reborrowed_any'], '%.0f%%' % (100 * a['reborrow_rate']) if a['reborrow_rate'] is not None else '-'))
     out += ['', 'Two-sided Fisher exact p (liquidated vs repaid/rolled, re-borrowed either way): %s.' % A['fisher_p_two_sided']]
     out += ['', '## B. Onchain liquidity of the borrowers liquidated after maturity', '',
-            '| Measure | Value |', '|---|---:|'] + ['| %s | %s |' % (k, v) for k, v in B.items()] + ['', *('- ' + n for n in rep['notes']), '']
+            '| Measure | Value |', '|---|---:|'] + ['| %s | %s |' % (k, v) for k, v in B.items()]
+    P = rep['penalty_ramp']
+    out += ['', '## Observed post-maturity penalty (seized collateral at the market oracle / debt repaid)', '',
+            'Liquidations above $1: %d. Max penalty %.2f%%. Mean absolute error of a linear ramp to max over 15 min: %s; over 60 min: %s (LIF units).' % (
+                P['liquidations_above_1usd'], 100 * (P['max_lif'] - 1), P['mean_abs_error_by_ramp_minutes'].get(15), P['mean_abs_error_by_ramp_minutes'].get(60)), '',
+            '| Minutes past maturity | Observed penalty |', '|---:|---:|'] + ['| %s | %.3f%% |' % (p['minutes'], p['observed_penalty_pct']) for p in P['points']]
+    out += ['', *('- ' + n for n in rep['notes']), '']
     return '\n'.join(out)
 
 
