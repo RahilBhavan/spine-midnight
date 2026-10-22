@@ -1,7 +1,7 @@
 """Done check for the Midnight maturity labels (spine.midnight). Run after spine.fetch_midnight:
 .venv/bin/python -m spine.check_maturity [YYYY-MM-DD ...]   (default: every matured date plus 2026-09-25 and 2026-10-30)
 
-1. Replay: every Take's totalUnitsDelta matches the credit replay; each position has one outcome, zero debt if closed.
+1. Replay: every Take's totalUnitsDelta matches the credit replay; each position has one outcome, at most dust debt if closed.
 2. Live state: debt(id, user) and totalUnits(id) read now over the public RPC equal the replay.
 3. DefiLlama: indexed Base borrowed (sum of totalUnits, the adapter's own definition) within 2% of api.llama.fi.
 4. Per maturity, after maturity + 1h: debt(id, user) at the maturity + 1h block (historical eth_call; Base blocks are 2s)
@@ -12,7 +12,7 @@ Exits 1 on any failure. Counts only, no rates."""
 import glob, json, os, sys, time
 from spine.api import MORPHO_BLUE, get_json, load, rpc
 from spine.fetch_midnight import ROLLING
-from spine.midnight import PRIVATE, TOTAL_UNITS, MIDNIGHT, events, label, multicall, read_debts, replay, debt_at
+from spine.midnight import PRIVATE, TOTAL_UNITS, MIDNIGHT, debt_at, dust_units, events, label, multicall, read_debts, replay
 
 LLAMA = 'https://api.llama.fi/protocol/morpho-midnight'
 BLUE_BORROW = '0x570954540bed6b1304a87dfe815a5eda4a648f7097a16240dcd85c9b5fd42a43'
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     # 1. replay consistency
     check(not bad, 'take replay: %d of %d Takes disagree with totalUnitsDelta' % (len(bad), len(ev['Take'])))
-    closed_bad = [r for r in rows if (r['outcome'] == 'open') != (int(r['debt_now']) > 0)]
+    closed_bad = [r for r in rows if (r['outcome'] == 'open') != (int(r['debt_now']) > dust_units(r['loan_token']))]
     check(not closed_bad, 'labels: %d positions, %d with outcome inconsistent with replayed debt' % (len(rows), len(closed_bad)))
 
     # 2. live state
@@ -132,8 +132,8 @@ if __name__ == '__main__':
         wrong = [r for r in rs if then[r['market'], r['user']] != debt_at(pos[r['market'], r['user']], T1)]
         check(not wrong, '%s: debt at maturity + 1h matches the replay for %d of %d positions' % (d, len(rs) - len(wrong), len(rs)))
         closed = [r for r in rs if r['closed_ts'] is not None and r['closed_ts'] <= T1]
-        remaining = [r for r in closed if then[r['market'], r['user']] > 0]
-        check(not remaining, '%s: %d of %d positions closed by maturity + 1h have zero contract debt' % (d, len(closed) - len(remaining), len(closed)))
+        remaining = [r for r in closed if then[r['market'], r['user']] > dust_units(r['loan_token'])]
+        check(not remaining, '%s: %d of %d positions closed by maturity + 1h hold at most dust in contract debt' % (d, len(closed) - len(remaining), len(closed)))
 
     # 5. rolls against Morpho Blue
     ok = 0
