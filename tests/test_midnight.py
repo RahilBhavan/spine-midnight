@@ -147,3 +147,33 @@ def test_rpc_retries_in_band_rate_limit(monkeypatch):
     monkeypatch.setattr(api, '_post', lambda url, body: {'error': {'code': -32000, 'message': 'execution reverted'}})
     with pytest.raises(RuntimeError):
         api.rpc('eth_call', [])
+
+
+def test_cohort_table_splits_scope_and_counts_penalties(monkeypatch):
+    from spine import cohort
+    e = usdc_log(('Liquidate', late_liq(E, 4, 5 * 10 ** 6 - 473)))
+    monkeypatch.setitem(cohort.SCOPE, M, 'test market')
+    monkeypatch.setattr(cohort, 'symbol', lambda t: t[:6])
+    rep = cohort.build(cohort.date(T), e, now=T + 7200, price_fn=lambda tokens, ts: {USDC: (1.0, 6)})
+    t = rep['scopes']['coinbase_scoped']['outcomes']
+    assert rep['matured'] and rep['scopes']['general']['outcomes']['all']['positions'] == 0
+    assert t['liquidated_late']['positions'] == 2 and t['liquidated_late']['minutes_past_maturity']['max'] == 15
+    assert t['open']['positions'] == 3 and t['open']['owed_at_maturity_usd'] == 15.0 and t['dust']['positions'] == 1  # F, G, H owe $5; D only borrowed 100 units
+    assert t['all']['positions'] == 8 and t['repaid']['closed_before_maturity'] == 1
+    want = (5 * 10 ** 6 - 473) * late_penalty(e['MarketCreated'][0], COL, 240) / 100 / 1e6 + 100 * late_penalty(e['MarketCreated'][0], COL, 900) / 100 / 1e6
+    assert abs(t['all']['penalties_usd'] - want) < 1e-3
+    assert rep['scopes']['coinbase_scoped']['owing_positions_size_hist']['$1-100'] == 4  # owing at maturity: E, F, G, H
+
+
+def test_cohort_before_maturity_counts_early_exits():
+    from spine import cohort
+    e = usdc_log()
+    rep = cohort.build(cohort.date(T), e, now=T - 30, price_fn=lambda tokens, ts: {USDC: (1.0, 6)})
+    a = rep['scopes']['all']
+    assert not rep['matured'] and a['early_exits'] == dict(repaid=1, rolled=1)
+    assert a['outcomes']['open']['owed_now_usd'] == 20.0 and a['outcomes']['liquidated_late']['positions'] == 0
+
+
+def test_size_hist_buckets():
+    from spine.cohort import size_hist
+    assert list(size_hist([0.5, 1, 99.9, 100, 2e5]).values()) == [1, 2, 1, 0, 0, 1]
