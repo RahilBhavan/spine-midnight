@@ -100,11 +100,14 @@ def build(day, ev=None, now=None, price_fn=prices):
     T = Counter(r['maturity'] for r in rows).most_common(1)[0][0]  # the date's main maturity (15:00 UTC); a few markets differ
     matured = max(r['maturity'] for r in rows) <= now
     px = price_fn({r['loan_token'] for r in rows}, int(min(T, now)))
+    cfg = {}  # latest BlueFallbackRolling config per (market, user): is a roll-to-Blue fallback switched on?
+    for x in sorted(ev.get('SetConfig', []), key=lambda x: (x['block'], x['log_index'])):
+        cfg[x['midnight_id'], x['user']] = x['enabled']
     for r in rows:
         tok = r['loan_token']
         r.update(peak_usd=usd(r['peak_debt'], tok, px), owed_minus_6h_usd=usd(r['debt_minus_6h'], tok, px),
                  owed_at_T_usd=usd(r['debt_at_maturity'], tok, px), owed_now_usd=usd(r['debt_now'], tok, px),
-                 penalty_usd=usd(r['late_penalty_units'], tok, px), scope='coinbase_scoped' if r['market'] in SCOPE else 'general')
+                 penalty_usd=usd(r['late_penalty_units'], tok, px), roll_config=cfg.get((r['market'], r['user'])), scope='coinbase_scoped' if r['market'] in SCOPE else 'general')
     markets = []
     for i in sorted({r['market'] for r in rows}, key=lambda i: (i not in SCOPE, i)):
         rs = [r for r in rows if r['market'] == i]
@@ -122,6 +125,9 @@ def build(day, ev=None, now=None, price_fn=prices):
         rs = [r for r in rows if s == 'all' or r['scope'] == s]
         scopes[s] = dict(outcomes=summarize(rs),
                          owing_positions_size_hist=size_hist([r[owed] for r in rs if r[owed] is not None and int(r['debt_now' if not matured else 'debt_at_maturity']) > dust_units(r['loan_token'])]),
+                         roll_configs=dict(positions_with_config=sum(1 for r in rs if r['roll_config'] is not None),
+                                           enabled=sum(1 for r in rs if r['roll_config']),
+                                           open_with_enabled_config=sum(1 for r in rs if r['roll_config'] and r['outcome'] == 'open')),
                          peak_size_hist=size_hist([r['peak_usd'] for r in rs if r['peak_usd'] is not None]),
                          early_exits=dict(repaid=sum(1 for r in rs if r['outcome'] == 'repaid' and r['closed_ts'] and r['closed_ts'] <= min(r['maturity'], now)),
                                           rolled=sum(1 for r in rs if r['outcome'] == 'rolled' and r['closed_ts'] and r['closed_ts'] <= min(r['maturity'], now))))
@@ -156,7 +162,10 @@ def markdown(rep, check=None):
             out.append('| %s | %d | %d | %s | %s | %s | %s |' % (o if o != 'all' else '**total**', r['positions'], r['closed_before_maturity'], money(r['peak_usd']),
                                                                  money(r[owed]), mins, '$%.2f' % r['penalties_usd']))
         h = rep['scopes'][s]['owing_positions_size_hist']
-        out += ['', 'Positions still owing above dust, by size: ' + ', '.join('%s: %d' % kv for kv in h.items()), '']
+        rc = rep['scopes'][s]['roll_configs']
+        out += ['', 'Positions still owing above dust, by size: ' + ', '.join('%s: %d' % kv for kv in h.items()),
+                'Roll-to-Blue fallback (BlueFallbackRolling): %d positions ever configured it, %d enabled now, %d of them still open.' % (
+                    rc['positions_with_config'], rc['enabled'], rc['open_with_enabled_config']), '']
     out += ['## By market', '', '| Market | Scope | Collateral -> loan | Positions | %s | Outcomes |' % ('Owed at maturity' if rep['matured'] else 'Owed now'), '|---|---|---|---:|---:|---|']
     for m in rep['markets']:
         out.append('| `%s` | %s | %s -> %s | %d | %s | %s |' % (m['market'][:12], m['scope'], ' + '.join(m['collateral']), m['loan'], m['positions'],

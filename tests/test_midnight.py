@@ -168,8 +168,11 @@ def test_cohort_table_splits_scope_and_counts_penalties(monkeypatch):
 def test_cohort_before_maturity_counts_early_exits():
     from spine import cohort
     e = usdc_log()
+    cfg = lambda user, enabled, b: dict(ts=T - 9000, block=b, log_index=0, user=user, midnight_id=M, enabled=enabled)
+    e['SetConfig'] = [cfg(E, True, 900), cfg(F, True, 901), cfg(F, False, 902)]  # F switched it off again
     rep = cohort.build(cohort.date(T), e, now=T - 30, price_fn=lambda tokens, ts: {USDC: (1.0, 6)})
     a = rep['scopes']['all']
+    assert a['roll_configs'] == dict(positions_with_config=2, enabled=1, open_with_enabled_config=1)
     assert not rep['matured'] and a['early_exits'] == dict(repaid=1, rolled=1)
     assert a['outcomes']['open']['owed_now_usd'] == 20.0 and a['outcomes']['liquidated_late']['positions'] == 0
 
