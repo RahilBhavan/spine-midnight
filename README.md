@@ -78,6 +78,8 @@ To refresh the event index, rebuild the September aggregate, and run the checks:
 
 These commands need network access to Blockscout, the public Base RPC and DefiLlama. No API key is required. `BLOCKSCOUT_API_KEY` is optional and only shortens the wait between Blockscout calls. The maturity check reads past contract state, so it needs an RPC that serves historical calls. A skipped check is not a pass.
 
+On 24 Oct 2026, a refresh attempt from one Linux host failed: Blockscout answered every keyless request with HTTP 403 (a Cloudflare challenge page), and the fetcher exited with `blockscout getLogs failed after retries` after about 10 minutes. The committed index is therefore still the 28 Sep 2026 one. Retry from another network, or set `BLOCKSCOUT_API_KEY`.
+
 Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check compares against DefiLlama's latest snapshot, so it fails against an old index. On 21 Oct 2026, the checker run against the committed 28 Sep index passed every other check, including all 148 positions at maturity plus one hour and all 43 rolls. The DefiLlama check failed with a 34.23% gap. On 24 Oct 2026 it failed again with a 36.71% gap, and every other check passed.
 
 ## Repository layout
