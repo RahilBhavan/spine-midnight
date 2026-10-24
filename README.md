@@ -66,7 +66,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m pytest -q tests
 ```
 
-Expected result: `5 passed` (observed on 21 Oct 2026 with Python 3.12.14). The tests run offline on a synthetic event log and on the committed aggregate.
+Expected result: `5 passed` (observed on 21 Oct 2026 with Python 3.12.14, and on 24 Oct 2026 with Python 3.14.7). The tests run offline on a synthetic event log and on the committed aggregate.
 
 To refresh the event index, rebuild the September aggregate, and run the checks:
 
@@ -78,7 +78,7 @@ To refresh the event index, rebuild the September aggregate, and run the checks:
 
 These commands need network access to Blockscout, the public Base RPC and DefiLlama. No API key is required. `BLOCKSCOUT_API_KEY` is optional and only shortens the wait between Blockscout calls. The maturity check reads past contract state, so it needs an RPC that serves historical calls. A skipped check is not a pass.
 
-Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check compares against DefiLlama's latest snapshot, so it fails against an old index. On 21 Oct 2026, the checker run against the committed 28 Sep index passed every other check, including all 148 positions at maturity plus one hour and all 43 rolls. The DefiLlama check failed with a 34.23% gap.
+Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check compares against DefiLlama's latest snapshot, so it fails against an old index. On 21 Oct 2026, the checker run against the committed 28 Sep index passed every other check, including all 148 positions at maturity plus one hour and all 43 rolls. The DefiLlama check failed with a 34.23% gap. On 24 Oct 2026 it failed again with a 36.71% gap, and every other check passed.
 
 ## Repository layout
 
@@ -111,7 +111,7 @@ Change the producer scripts rather than editing files in `data/midnight/`. Raw o
 - Public results are aggregate counts with no wallet-type split. They do not estimate any party's exposure or losses.
 - Wallet tags and live snapshots stay in the gitignored `private/` directory and are not part of this repository.
 - The draft page in `midnight/` is not deployed. It goes live only after the runbook's publication gate.
-- There is no CI. The tests and checks run by hand.
+- CI runs only the offline pytest suite (`.github/workflows/tests.yml`). It has not run on GitHub yet. The live maturity checks run by hand because they need network access.
 
 ## License
 
