@@ -6,16 +6,23 @@ Topics are keccak of the signatures in midnight/src/libraries/EventsLib.sol and 
 Withdraw and UpdatePosition are indexed too: they move credit, and credit decides whether a Take sell adds debt.
 ClaimContinuousFee cuts a market's totalUnits, which is what DefiLlama reports as borrowed.
 Blockscout misses some logs, so fill_gaps() then sweeps the public Base RPC and merges what is missing.
-Run: .venv/bin/python -m spine.fetch_midnight"""
-import http.client, json, os, time, urllib.error, urllib.request
+Blockscout now answers keyless scripts with HTTP 403 (a Cloudflare challenge). A 403 or 5xx is not retried: the run
+drops straight to the RPC sweep, which reads the same logs through eth_getLogs, so the output files are identical.
+Run: .venv/bin/python -m spine.fetch_midnight [--source auto|rpc|blockscout]   (auto = Blockscout, RPC on failure)"""
+import http.client, json, os, sys, time, urllib.error, urllib.request
 from concurrent.futures import ThreadPoolExecutor
-from spine.api import UA, load, rpc, save
+from spine.api import BASE_RPC, UA, _post, load, save
 
 BLOCKSCOUT = 'https://base.blockscout.com/api'
 MIDNIGHT = '0xAdedD8ab6dE832766Fedf0FaC4992E5C4D3EA18A'
 ROLLING = '0x7bfA8207B818cc0e23a7aBdCBe56572fAbCa831F'  # BlueFallbackRolling
 PACE = 0.5 if os.environ.get('BLOCKSCOUT_API_KEY') else 7  # keyless limit is 10 calls per window; ~1 call per 7s never tripped it
 MAX_WAIT = 400  # seconds; a longer Blockscout block hands the run to the RPC sweep
+# Free Base endpoints for eth_getLogs, tried in order. mainnet.base.org (the repo's live-check RPC) caps a range at 2000
+# blocks and answers -32011 "request limit reached" under load; publicnode serves the same logs with blockTimestamp.
+RPC_URLS = ([os.environ['SPINE_RPC_URL']] if os.environ.get('SPINE_RPC_URL') else []) + [BASE_RPC, 'https://base-rpc.publicnode.com']
+RPC_TRIES = 5  # attempts per endpoint per window, with exponential backoff
+blockscout_down = False  # set on the first 403/5xx so the other eight events do not each wait on it
 FROM_BLOCK = 48286884  # Midnight deployment on Base (DefiLlama adapter fromBlock; no event before it)
 
 W = lambda d, i: int(d[2 + 64 * i:2 + 64 * (i + 1)], 16)  # i-th 32-byte word of hex data
@@ -71,6 +78,9 @@ def get_logs(address, topic0, frm):
     url = '%s?module=logs&action=getLogs&address=%s&topic0=%s&fromBlock=%d&toBlock=latest' % (BLOCKSCOUT, address, topic0, frm)
     if os.environ.get('BLOCKSCOUT_API_KEY'):
         url += '&apikey=' + os.environ['BLOCKSCOUT_API_KEY']
+    global blockscout_down
+    if blockscout_down:
+        raise Throttled('blockscout already failed this run')
     for i in range(8):
         time.sleep(PACE)
         try:
@@ -78,13 +88,16 @@ def get_logs(address, topic0, frm):
         except urllib.error.HTTPError as e:
             wait = int(e.headers.get('x-ratelimit-reset') or 0) / 1000 if e.code == 429 else 0
             if wait > MAX_WAIT:
+                blockscout_down = True
                 raise Throttled('blockscout blocked for %.0f min' % (wait / 60))
-            if e.code >= 500:
+            if e.code >= 500 or e.code in (401, 403):  # 403 = Cloudflare challenge for keyless scripts; retrying never helps
+                blockscout_down = True
                 raise Throttled('blockscout returned HTTP %d' % e.code)
             print('  blockscout %d, sleeping %.0fs' % (e.code, max(wait, 2 ** i)), flush=True)
             time.sleep(max(wait, 2 ** i) + 5)
             continue
         except http.client.RemoteDisconnected:
+            blockscout_down = True
             raise Throttled('blockscout disconnected')
         except (urllib.error.URLError, TimeoutError, ValueError):  # dropped connection or truncated body
             time.sleep(2 ** i)
@@ -132,13 +145,46 @@ def fetch_event(name):
     return items
 
 
-def fill_gaps(ev, step=2000):
+_preferred = None  # the endpoint that last answered; later calls try it first instead of re-waiting on a limited one
+
+
+def rpc_request(method, params, urls=None, tries=RPC_TRIES):
+    """JSON-RPC call with bounded retries: each endpoint gets `tries` attempts with exponential backoff (HTTP 429/5xx
+    and JSON-RPC errors such as -32011 'request limit reached' all count), then the next endpoint. The endpoint that
+    last answered goes first. Raises when every endpoint fails."""
+    global _preferred
+    urls = list(urls or RPC_URLS)
+    if _preferred in urls:
+        urls.remove(_preferred)
+        urls.insert(0, _preferred)
+    last = None
+    for url in urls:
+        for i in range(tries):
+            try:
+                r = _post(url, {'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': params}, retries=1)
+            except Exception as e:  # HTTP 429/403/5xx, dropped connection, bad body
+                last = e
+            else:
+                if 'result' in r:
+                    _preferred = url
+                    return r['result']
+                last = RuntimeError(r.get('error'))
+            time.sleep(min(2 ** i, 30))
+        print('  rpc %s failed (%s), trying the next endpoint' % (url, last), flush=True)
+    raise RuntimeError('%s failed on every endpoint: %s' % (method, last))
+
+
+def rpc_logs(params, urls=None, tries=RPC_TRIES):
+    return rpc_request('eth_getLogs', [params], urls, tries)
+
+
+def fill_gaps(ev, step=2000, tip=None, get=None):
     """Blockscout's index has holes (a Take in block 48635200 is missing from it entirely), so we sweep the public RPC's
     eth_getLogs (2000-block cap) for every topic on both contracts and merge what Blockscout lacks. Incremental:
     data/midnight/rpc_checked.json holds the last block swept. Returns {event: logs added}."""
     names = {topic0: name for name, (_, topic0, _) in EVENTS.items()}
     frm = (load('midnight/rpc_checked') or {'to': FROM_BLOCK})['to']
-    tip = int(rpc('eth_blockNumber', []), 16)
+    tip = tip or int(rpc_request('eth_blockNumber', []), 16)
     seen = {name: {key(r) for r in items} for name, items in ev.items()}
     added = {name: 0 for name in EVENTS}
     def checkpoint(to):
@@ -148,10 +194,10 @@ def fill_gaps(ev, step=2000):
                                             items=ev[name]), separators=(',', ':'))
         save('midnight/rpc_checked', {'to': to})
 
-    get = lambda b: rpc('eth_getLogs', [{'address': [MIDNIGHT, ROLLING], 'topics': [list(names)], 'fromBlock': hex(b),
-                                          'toBlock': hex(min(b + step - 1, tip))}])
+    get = get or (lambda b: rpc_logs({'address': [MIDNIGHT, ROLLING], 'topics': [list(names)], 'fromBlock': hex(b),
+                                      'toBlock': hex(min(b + step - 1, tip))}))
     starts = list(range(frm, tip + 1, step))
-    with ThreadPoolExecutor(8) as pool:  # ~1700 windows for a full sweep; 8 in flight keeps the public RPC happy
+    with ThreadPoolExecutor(4) as pool:  # ~600 windows since the last sweep; 4 in flight stays under the public RPC limit
         for k in range(0, len(starts), 200):
             for logs in pool.map(get, starts[k:k + 200]):
                 for l in logs:
@@ -168,9 +214,15 @@ def fill_gaps(ev, step=2000):
     return added
 
 
-def fetch_all():
-    ev = {name: fetch_event(name) for name in EVENTS}
-    added = fill_gaps(ev)
+def load_all():
+    return {name: (load('midnight/%s' % name) or {'items': []})['items'] for name in EVENTS}
+
+
+def fetch_all(source='auto'):
+    global blockscout_down
+    blockscout_down = source == 'rpc'
+    ev = load_all() if source == 'rpc' else {name: fetch_event(name) for name in EVENTS}
+    added = {} if source == 'blockscout' else fill_gaps(ev)
     if any(added.values()):
         print('public RPC filled logs Blockscout lacked:', {k: v for k, v in added.items() if v})
     return ev
@@ -178,7 +230,10 @@ def fetch_all():
 
 if __name__ == '__main__':
     t = time.time()
-    ev = fetch_all()
+    args = sys.argv[1:]
+    source = args[args.index('--source') + 1] if '--source' in args else 'auto'
+    assert source in ('auto', 'rpc', 'blockscout'), 'source must be auto, rpc or blockscout'
+    ev = fetch_all(source)
     for name, items in ev.items():
         extra = ' (post-maturity %d)' % sum(r['post_maturity'] for r in items) if name == 'Liquidate' else ''
         print('%-15s %6d%s' % (name, len(items), extra))
