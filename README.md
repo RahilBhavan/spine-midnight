@@ -6,6 +6,8 @@ Spine Midnight is an independent study of Morpho Midnight, the fixed-maturity lo
 
 ## Results
 
+![Draft results page, snapshot 25 Oct 2026: how Morpho Midnight borrow positions on Base ended, one row per maturity date, counting repaid, rolled, liquidated, liquidated after maturity and open positions](docs/maturity-outcomes.png)
+
 The 25 Sep 2026 maturity is the first published checkpoint. Counts come from `data/midnight/maturity.json` (key `2026-09-25`), regenerated 25 Oct 2026 at 14:19 UTC from an index that runs to Base block 53,074,299. The counts are as of that run, so positions that were open on 28 Sep have since been liquidated or repaid.
 
 | Outcome | Positions | Meaning |
