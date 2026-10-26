@@ -16,12 +16,18 @@ Prefix each command with `.venv/bin/` when using a virtual environment. Run `spi
 
 ## October 30 maturity
 
-The target maturity is 15:00 UTC. Run the event fetch ahead of time, then take snapshots at 09:00, 15:00, and 16:00 UTC. At 15:00 use `snapshot --no-fetch` so the read lands near the checkpoint. After 16:00:
+The target maturity is 15:00 UTC. It is HELD until 16:00 UTC (maturity plus the checker's one-hour cut-off). Run the event fetch ahead of time, then take snapshots at 09:00, 15:00, and 16:00 UTC. At 15:00 use `snapshot --no-fetch` so the read lands near the checkpoint. After 16:00, one command refuses to run early and otherwise runs the fetch, the label and the check for that date in order:
+
+```sh
+.venv/bin/python -m spine.rerun_maturity 2026-10-30            # exit 3 and HELD before 16:00 UTC; --status only prints the state
+```
+
+It is the same as the three commands below it, minus `tag`, which writes private output and stays a separate step:
 
 ```sh
 .venv/bin/python -m spine.fetch_midnight
 .venv/bin/python -m spine.midnight label 2026-10-30
-.venv/bin/python -m spine.check_maturity
+.venv/bin/python -m spine.check_maturity 2026-10-30
 .venv/bin/python -m spine.midnight tag
 ```
 
