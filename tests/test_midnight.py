@@ -180,3 +180,119 @@ def test_cohort_before_maturity_counts_early_exits():
 def test_size_hist_buckets():
     from spine.cohort import size_hist
     assert list(size_hist([0.5, 1, 99.9, 100, 2e5]).values()) == [1, 2, 1, 0, 0, 1]
+# --- Blockscout and RPC read the same logs and must save identical events (no network) ---------------------------------
+import json, os
+from spine import api
+
+FIXTURE = os.path.join(os.path.dirname(__file__), 'fixtures', 'base_logs.json')  # eth_getLogs results recorded from Base on 2026-10-25
+RPC_LOGS = json.load(open(FIXTURE))
+TIP = max(int(l['blockNumber'], 16) for l in RPC_LOGS) + 10
+
+
+def blockscout_shape(log):
+    """The etherscan-style getLogs row: hex timeStamp, topics padded to four with null. (Blockscout answers 403 to keyless
+    scripts now, so this shape is built from the documented format rather than recorded.)"""
+    return dict(address=log['address'], blockNumber=log['blockNumber'], timeStamp=log['blockTimestamp'], logIndex=log['logIndex'],
+                transactionHash=log['transactionHash'], data=log['data'], topics=log['topics'] + [None] * (4 - len(log['topics'])))
+
+
+def saved(tmp_path):
+    out = {}
+    for name in fetch_midnight.EVENTS:
+        d = json.load(open(tmp_path / 'midnight' / (name + '.json')))
+        assert d['count'] == len(d['items'])
+        out[name] = d['items']
+    return out
+
+
+def run_blockscout(monkeypatch, tmp_path):
+    monkeypatch.setattr(api, 'DATA', str(tmp_path))
+    def get_logs(address, topic0, frm):
+        return [blockscout_shape(l) for l in RPC_LOGS if l['address'].lower() == address.lower() and l['topics'][0] == topic0
+                and int(l['blockNumber'], 16) >= frm]
+    monkeypatch.setattr(fetch_midnight, 'get_logs', get_logs)
+    for name in fetch_midnight.EVENTS:
+        fetch_midnight.fetch_event(name)
+    return saved(tmp_path)
+
+
+def run_rpc(monkeypatch, tmp_path, step=50_000):
+    monkeypatch.setattr(api, 'DATA', str(tmp_path))
+    windows = []
+    def get(b):
+        lo, hi = b, min(b + step - 1, TIP)
+        windows.append((lo, hi))
+        return [l for l in RPC_LOGS if lo <= int(l['blockNumber'], 16) <= hi]
+    ev = {name: [] for name in fetch_midnight.EVENTS}
+    api.save('midnight/rpc_checked', {'to': min(int(l['blockNumber'], 16) for l in RPC_LOGS)})
+    fetch_midnight.fill_gaps(ev, step=step, tip=TIP, get=get)
+    return saved(tmp_path), windows
+
+
+def test_blockscout_and_rpc_paths_save_identical_events(monkeypatch, tmp_path):
+    via_blockscout = run_blockscout(monkeypatch, tmp_path / 'b')
+    via_rpc, _ = run_rpc(monkeypatch, tmp_path / 'r')
+    assert via_blockscout == via_rpc
+    assert sum(map(len, via_rpc.values())) == len(RPC_LOGS) and len(via_rpc['Take']) and len(via_rpc['Roll'])
+
+
+def test_rpc_rows_match_committed_index(monkeypatch):
+    committed = {n: {fetch_midnight.key(r): r for r in (load('midnight/%s' % n) or {'items': []})['items']} for n in fetch_midnight.EVENTS}
+    if not any(committed.values()):
+        pytest.skip('data/midnight absent')
+    names = {t: n for n, (_, t, _) in fetch_midnight.EVENTS.items()}
+    for l in RPC_LOGS:
+        r = fetch_midnight.row(names[l['topics'][0]], l)
+        assert committed[names[l['topics'][0]]][fetch_midnight.key(r)] == r
+
+
+def test_rpc_windows_are_bounded_and_contiguous(monkeypatch, tmp_path):
+    windows = sorted(run_rpc(monkeypatch, tmp_path, step=50_000)[1])  # the pool reads windows concurrently
+    assert all(hi - lo < 50_000 for lo, hi in windows)
+    assert all(b[0] == a[1] + 1 for a, b in zip(windows, windows[1:])) and windows[-1][1] == TIP
+    assert json.load(open(tmp_path / 'midnight' / 'rpc_checked.json')) == {'to': TIP + 1}
+
+
+def test_rpc_rerun_is_idempotent(monkeypatch, tmp_path):
+    first, _ = run_rpc(monkeypatch, tmp_path)
+    api.save('midnight/rpc_checked', {'to': 0})  # force a full re-read over the saved files
+    ev = {n: list(items) for n, items in first.items()}
+    added = fetch_midnight.fill_gaps(ev, step=50_000, tip=TIP, get=lambda b: [l for l in RPC_LOGS if b <= int(l['blockNumber'], 16) < b + 50_000])
+    assert not any(added.values()) and saved(tmp_path) == first
+
+
+def test_blockscout_403_is_not_retried_and_skips_later_events(monkeypatch):
+    calls = []
+    def fail(_req, timeout):
+        calls.append(1)
+        raise urllib.error.HTTPError('https://base.blockscout.com', 403, 'forbidden', {}, BytesIO(b'challenge'))
+    monkeypatch.setattr(fetch_midnight.urllib.request, 'urlopen', fail)
+    monkeypatch.setattr(fetch_midnight.time, 'sleep', lambda _s: None)
+    monkeypatch.setattr(fetch_midnight, 'blockscout_down', False)
+    for _ in range(2):
+        with pytest.raises(fetch_midnight.Throttled):
+            fetch_midnight.get_logs(fetch_midnight.MIDNIGHT, fetch_midnight.EVENTS['Take'][1], 1)
+    assert len(calls) == 1
+
+
+def test_rpc_request_backs_off_then_falls_back_to_next_endpoint(monkeypatch):
+    seen, sleeps, b_calls = [], [], []
+    def post(url, body, retries):
+        seen.append(url)
+        if url == 'https://a':
+            return {'error': {'code': -32011, 'message': 'request limit reached'}}
+        b_calls.append(1)
+        if len(b_calls) < 2:
+            raise urllib.error.HTTPError(url, 429, 'slow down', {}, BytesIO())
+        return {'result': ['ok']}
+    monkeypatch.setattr(fetch_midnight, '_post', post)
+    monkeypatch.setattr(fetch_midnight.time, 'sleep', sleeps.append)
+    monkeypatch.setattr(fetch_midnight, '_preferred', None)
+    assert fetch_midnight.rpc_logs({}, urls=['https://a', 'https://b'], tries=3) == ['ok']
+    assert seen == ['https://a'] * 3 + ['https://b'] * 2 and sleeps == [1, 2, 4, 1]
+    seen.clear()
+    fetch_midnight.rpc_logs({}, urls=['https://a', 'https://b'], tries=3)
+    assert seen == ['https://b']  # the endpoint that answered goes first
+    monkeypatch.setattr(fetch_midnight, '_post', lambda *a, **k: {'error': 'nope'})
+    with pytest.raises(RuntimeError):
+        fetch_midnight.rpc_logs({}, urls=['https://a'], tries=2)

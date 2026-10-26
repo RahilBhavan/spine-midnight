@@ -6,13 +6,13 @@ This repository indexes Morpho Midnight loans on Base and labels the outcome of 
 
 | Command | Output | Visibility |
 |---|---|---|
-| `python -m spine.fetch_midnight` | `data/midnight/<Event>.json` and `rpc_checked.json` | Public chain data |
+| `python -m spine.fetch_midnight [--source auto|rpc|blockscout]` | `data/midnight/<Event>.json` and `rpc_checked.json` | Public chain data |
 | `python -m spine.midnight label [YYYY-MM-DD ...]` | `data/midnight/maturity.json` | Aggregate counts only |
 | `python -m spine.midnight snapshot [--no-fetch]` | `private/midnight/snapshots/` | Private |
 | `python -m spine.midnight tag` | `private/midnight/coinbase_split.json` | Private; never commit |
 | `python -m spine.check_maturity [YYYY-MM-DD ...]` | PASS/FAIL checks; no file | Verification |
 
-Prefix each command with `.venv/bin/` when using a virtual environment. `private/` is gitignored. The draft page is at `midnight/maturity.html`; it reads aggregate data from `data/midnight/maturity.json` when served from the repository root. It has `noindex` and is not deployed.
+Prefix each command with `.venv/bin/` when using a virtual environment. Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check compares the index with DefiLlama's latest snapshot, so it fails against an old index. On 2026-10-25, the refreshed index passed every contract-state check and the DefiLlama gap was 8.50%, above the 2% limit. `private/` is gitignored. The draft page is at `midnight/maturity.html`; it reads aggregate data from `data/midnight/maturity.json` when served from the repository root. It has `noindex` and is not deployed.
 
 ## October 30 maturity
 

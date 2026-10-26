@@ -1,5 +1,5 @@
 {
- "generated_at": 1792697625,
+ "generated_at": 1793024431,
  "late_bins_min": [
   0,
   5,
@@ -1904,11 +1904,11 @@
    "roll_events": 0
   },
   "2026-10-26": {
-   "markets": 1,
-   "positions": 2,
+   "markets": 2,
+   "positions": 3,
    "matured": false,
    "outcomes": {
-    "repaid": 1,
+    "repaid": 2,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
@@ -1979,23 +1979,23 @@
   },
   "2026-10-30": {
    "markets": 19,
-   "positions": 598,
+   "positions": 599,
    "matured": false,
    "outcomes": {
-    "repaid": 221,
+    "repaid": 262,
     "rolled": 14,
     "liquidated": 5,
     "liquidated_late": 0,
-    "open": 334,
-    "dust": 24
+    "open": 293,
+    "dust": 25
    },
    "open_at_maturity": {
     "repaid": 8,
     "rolled": 0,
     "liquidated": 3,
     "liquidated_late": 0,
-    "open": 334,
-    "dust": 24
+    "open": 293,
+    "dust": 25
    },
    "late_minutes_hist": [
     0,
@@ -2012,7 +2012,7 @@
     0,
     0
    ],
-   "roll_events": 162
+   "roll_events": 167
   },
   "2026-11-06": {
    "markets": 1,
@@ -2238,22 +2238,22 @@
   },
   "2026-11-27": {
    "markets": 13,
-   "positions": 651,
+   "positions": 682,
    "matured": false,
    "outcomes": {
-    "repaid": 178,
+    "repaid": 194,
     "rolled": 8,
-    "liquidated": 0,
+    "liquidated": 1,
     "liquidated_late": 0,
-    "open": 459,
+    "open": 473,
     "dust": 6
    },
    "open_at_maturity": {
     "repaid": 12,
     "rolled": 0,
-    "liquidated": 0,
+    "liquidated": 1,
     "liquidated_late": 0,
-    "open": 459,
+    "open": 473,
     "dust": 6
    },
    "late_minutes_hist": [
@@ -2271,7 +2271,7 @@
     0,
     0
    ],
-   "roll_events": 77
+   "roll_events": 94
   },
   "2026-12-11": {
    "markets": 1,
@@ -2349,23 +2349,23 @@
   },
   "2026-12-25": {
    "markets": 15,
-   "positions": 92,
+   "positions": 153,
    "matured": false,
    "outcomes": {
-    "repaid": 25,
-    "rolled": 4,
+    "repaid": 35,
+    "rolled": 3,
     "liquidated": 3,
     "liquidated_late": 0,
-    "open": 55,
-    "dust": 5
+    "open": 106,
+    "dust": 6
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 2,
     "liquidated_late": 0,
-    "open": 55,
-    "dust": 5
+    "open": 106,
+    "dust": 6
    },
    "late_minutes_hist": [
     0,
@@ -2382,7 +2382,7 @@
     0,
     0
    ],
-   "roll_events": 6
+   "roll_events": 8
   },
   "2027-01-09": {
    "markets": 1,
@@ -2571,14 +2571,14 @@
   },
   "2027-03-26": {
    "markets": 6,
-   "positions": 10,
+   "positions": 11,
    "matured": false,
    "outcomes": {
     "repaid": 2,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 8,
+    "open": 9,
     "dust": 0
    },
    "open_at_maturity": {
@@ -2586,7 +2586,7 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 8,
+    "open": 9,
     "dust": 0
    },
    "late_minutes_hist": [
