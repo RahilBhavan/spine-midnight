@@ -1,0 +1,1 @@
+Bar card titled "128 of 148 repaid". Of 148 Morpho Midnight borrow positions on Base that matured on 25 Sep 2026, 128 were repaid (highlighted), 2 rolled into Morpho Blue, 18 were liquidated (all after maturity) and 0 are still open. Bars share one scale from zero to 148. Source: Midnight events on Base, blocks 48,286,884 to 53,074,299, data as of 25 Oct 2026.

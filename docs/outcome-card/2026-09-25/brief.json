@@ -1,0 +1,36 @@
+{
+  "id": "midnight-2026-09-25-outcomes",
+  "title": "128 of 148 repaid",
+  "system_version": "3.10.0",
+  "accents": 1,
+  "accent_meaning": "title-value",
+  "encodings": [
+    {
+      "mark": "bar",
+      "baseline": 0,
+      "scale_max": 148
+    }
+  ],
+  "sizes_checked": [
+    "390x390"
+  ],
+  "measurement_basis": "canvas",
+  "measured_by": "social_bars/firefox",
+  "min_label_px": 22,
+  "point_px": 48,
+  "title_lines": 1,
+  "overflow": [],
+  "source": "Source: Midnight events, Base blocks 48,286,884\u201353,074,299. Data 25 Oct 2026.",
+  "alt": "Bar card titled \"128 of 148 repaid\". Of 148 Morpho Midnight borrow positions on Base that matured on 25 Sep 2026, 128 were repaid (highlighted), 2 rolled into Morpho Blue, 18 were liquidated (all after maturity) and 0 are still open. Bars share one scale from zero to 148. Source: Midnight events on Base, blocks 48,286,884 to 53,074,299, data as of 25 Oct 2026.",
+  "artifacts": {
+    "card.html": "4cf8dcf0d3985e6c6262fc5216ca466ec8dc760fc84bd68ab3a475263e4de9c2",
+    "card.png": "bb721529f3d48200a2c4d71a0731da66589c8d76f16040e31266a6f3029ec4ff",
+    "feed-360.png": "88a5c2da5ca664a734b091337a3a0e63484583564b0c82ba934eb66b07920090",
+    "feed-390.png": "6ec6f56ca505a5d8216f88dec24cffda83ddeb64c48be1c070d4f10e78e41382"
+  },
+  "feed_images": [
+    "feed-360.png",
+    "feed-390.png"
+  ],
+  "export": "1080x1080 PNG, authored at 390px and scaled 2.7692x"
+}

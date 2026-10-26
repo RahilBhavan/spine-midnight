@@ -1,0 +1,24 @@
+# Checks run 2026-10-26 against Rahil Design 3.10.0 (requested: 3.3.2; palette, fonts and identity are unchanged since)
+
+$ design_check.py system
+rahil-design@3.10.0: 19 contrast pairs, 5 pairs x 3 CVD simulations, 15 colours, ok (0 errors)
+exit=0
+
+$ design_check.py lint card.html
+exit=0
+
+$ design_check.py feed brief.json
+brief.json: at 326px feed width (canvas, 390px inspection) labels 18.4px, point 40.1px: ok
+exit=0
+
+$ pixel_audit.py card.png
+card.png: 0.00% of pixels off-system (limit 0.01%)
+exit=0
+
+$ pixel_audit.py feed-360.png
+feed-360.png: 0.00% of pixels off-system (limit 0.01%)
+exit=0
+
+$ pixel_audit.py feed-390.png
+feed-390.png: 0.00% of pixels off-system (limit 0.01%)
+exit=0

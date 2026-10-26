@@ -23,7 +23,11 @@ The 25 Sep 2026 maturity is the first published checkpoint. Counts come from `da
 - The same aggregate covers 79 maturity dates from 9 Jul 2026 to 31 Dec 2028. 51 of them had matured at the run.
 - These are position counts across the whole market. They are not a Coinbase wallet breakdown, current balances, or loss estimates.
 
-The 30 Oct 2026 maturity and the final two-maturity report are pending.
+![Preview card, data 25 Oct 2026: 128 of 148 positions from the 25 Sep 2026 maturity ended repaid, 2 rolled, 18 liquidated and 0 open](docs/outcome-card/2026-09-25/card.png)
+
+The 25 Sep card is a draft preview: it is not published, and the publication gate in `MIDNIGHT.md` is still open (the DefiLlama gap, below). Its spec, checks and hashes are in `docs/outcome-card/2026-09-25/`.
+
+**The 30 Oct 2026 maturity is HELD.** It matures at 15:00 UTC on 30 Oct 2026, so it has no outcome yet: the 25 Oct aggregate lists 329 of its 599 positions as open, and that is a count before maturity, not a result. Run `.venv/bin/python -m spine.rerun_maturity 2026-10-30` after 16:00 UTC on 30 Oct 2026. Before then it prints `HELD` and exits 3 without touching the network. The final two-maturity report is pending.
 
 ## How it works
 
@@ -66,7 +70,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m pytest -q tests
 ```
 
-Expected result: `11 passed` (observed on 25 Oct 2026 with Python 3.14.7). The tests run offline on a synthetic event log, the committed aggregate and recorded `eth_getLogs` fixtures (`tests/fixtures/base_logs.json`).
+Expected result: `18 passed` (observed on 26 Oct 2026 with Python 3.13.15). The tests run offline on a synthetic event log, the committed aggregate and recorded `eth_getLogs` fixtures (`tests/fixtures/base_logs.json`).
 
 To refresh the event index, rebuild the September aggregate, and run the checks:
 
@@ -89,6 +93,7 @@ Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check co
 | `spine/` | Fetcher, replay and labels, checker, and the HTTP and wallet-tagging helpers copied from Spine. |
 | `data/midnight/` | Indexed event files, the RPC sweep marker and the aggregate `maturity.json`. The scripts generate these files. |
 | `tests/` | Pytest tests for the replay, labels, penalty rule, aggregate shape, block search, Blockscout fallback and Blockscout/RPC equivalence. |
+| `docs/outcome-card/` | The 25 Sep 2026 outcome card (`spec.json`, 1080px `card.png`, 360px and 390px feed images, `checks.txt`). `spine/outcome_card.py` writes the spec and renders it with Rahil Design's card tools. |
 | `midnight/` | `maturity.html`, a draft results page. It is marked `noindex` and is not deployed. |
 | `site/` | The stylesheet that the draft page uses. |
 
@@ -108,7 +113,7 @@ Change the producer scripts rather than editing files in `data/midnight/`. Raw o
 ## Scope and limits
 
 - This is independent research. It is not affiliated with or endorsed by Coinbase or Morpho.
-- Only the 25 Sep 2026 checkpoint is published. The 30 Oct 2026 maturity and the final report are pending.
+- Only the 25 Sep 2026 checkpoint is published. The 30 Oct 2026 maturity is held until it has matured, and the final report is pending.
 - Public results are aggregate counts with no wallet-type split. They do not estimate any party's exposure or losses.
 - Wallet tags and live snapshots stay in the gitignored `private/` directory and are not part of this repository.
 - The draft page in `midnight/` is not deployed. It goes live only after the runbook's publication gate.
