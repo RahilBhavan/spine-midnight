@@ -1,5 +1,5 @@
 {
- "generated_at": 1792937980,
+ "generated_at": 1793024431,
  "late_bins_min": [
   0,
   5,
@@ -21,18 +21,20 @@
    "positions": 9,
    "matured": true,
    "outcomes": {
-    "repaid": 8,
+    "repaid": 7,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 2,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 2,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -56,18 +58,20 @@
    "positions": 15,
    "matured": true,
    "outcomes": {
-    "repaid": 5,
+    "repaid": 6,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 10,
-    "open": 0
+    "liquidated_late": 9,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 10,
-    "open": 0
+    "liquidated_late": 9,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     9,
@@ -91,18 +95,20 @@
    "positions": 4,
    "matured": true,
    "outcomes": {
-    "repaid": 3,
+    "repaid": 4,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 0,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 0,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -130,14 +136,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -165,14 +173,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -196,18 +206,20 @@
    "positions": 13,
    "matured": true,
    "outcomes": {
-    "repaid": 9,
+    "repaid": 10,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 4,
-    "open": 0
+    "liquidated_late": 3,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 4,
-    "open": 0
+    "liquidated_late": 3,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -235,14 +247,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -266,18 +280,20 @@
    "positions": 3,
    "matured": true,
    "outcomes": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 2,
-    "open": 0
+    "liquidated_late": 3,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 2,
-    "open": 0
+    "liquidated_late": 3,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     3,
@@ -301,18 +317,20 @@
    "positions": 233,
    "matured": true,
    "outcomes": {
-    "repaid": 153,
+    "repaid": 26,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 80,
-    "open": 0
+    "liquidated_late": 207,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 127,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 80,
-    "open": 0
+    "liquidated_late": 207,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     12,
@@ -336,18 +354,20 @@
    "positions": 54,
    "matured": true,
    "outcomes": {
-    "repaid": 39,
+    "repaid": 21,
     "rolled": 0,
-    "liquidated": 0,
-    "liquidated_late": 15,
-    "open": 0
+    "liquidated": 3,
+    "liquidated_late": 30,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 18,
+    "repaid": 1,
     "rolled": 0,
-    "liquidated": 0,
-    "liquidated_late": 15,
-    "open": 0
+    "liquidated": 2,
+    "liquidated_late": 30,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     18,
@@ -375,14 +395,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -406,18 +428,20 @@
    "positions": 4,
    "matured": true,
    "outcomes": {
-    "repaid": 3,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 3,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 2,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 3,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     3,
@@ -441,18 +465,20 @@
    "positions": 9,
    "matured": true,
    "outcomes": {
-    "repaid": 7,
+    "repaid": 5,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 2,
-    "open": 0
+    "liquidated_late": 4,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 3,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 2,
-    "open": 0
+    "liquidated_late": 4,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -476,18 +502,20 @@
    "positions": 3,
    "matured": true,
    "outcomes": {
-    "repaid": 2,
-    "rolled": 0,
-    "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
-   },
-   "open_at_maturity": {
     "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 2,
+    "open": 0,
+    "dust": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 2,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -515,14 +543,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -546,18 +576,20 @@
    "positions": 1,
    "matured": true,
    "outcomes": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -581,18 +613,20 @@
    "positions": 4,
    "matured": true,
    "outcomes": {
-    "repaid": 3,
+    "repaid": 4,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 0,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 0,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -620,14 +654,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -651,18 +687,20 @@
    "positions": 3,
    "matured": true,
    "outcomes": {
-    "repaid": 2,
-    "rolled": 0,
-    "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
-   },
-   "open_at_maturity": {
     "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 1,
-    "open": 0
+    "liquidated_late": 2,
+    "open": 0,
+    "dust": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 2,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     2,
@@ -690,14 +728,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -725,14 +765,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -760,14 +802,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 2,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -795,14 +839,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -826,18 +872,20 @@
    "positions": 1,
    "matured": true,
    "outcomes": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -861,18 +909,20 @@
    "positions": 100,
    "matured": true,
    "outcomes": {
-    "repaid": 91,
+    "repaid": 90,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 9,
-    "open": 0
+    "liquidated_late": 10,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 3,
+    "repaid": 2,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 9,
-    "open": 0
+    "liquidated_late": 10,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -896,18 +946,20 @@
    "positions": 87,
    "matured": true,
    "outcomes": {
-    "repaid": 69,
+    "repaid": 63,
     "rolled": 0,
-    "liquidated": 0,
-    "liquidated_late": 18,
-    "open": 0
+    "liquidated": 1,
+    "liquidated_late": 23,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 10,
+    "repaid": 5,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 18,
-    "open": 0
+    "liquidated_late": 23,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     2,
@@ -935,14 +987,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -970,14 +1024,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1005,14 +1061,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 2,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 2,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -1040,14 +1098,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -1075,14 +1135,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1110,14 +1172,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1145,14 +1209,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 2,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 2,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1180,14 +1246,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -1215,14 +1283,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1246,18 +1316,20 @@
    "positions": 2,
    "matured": true,
    "outcomes": {
-    "repaid": 2,
-    "rolled": 0,
-    "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
-   },
-   "open_at_maturity": {
     "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
+   },
+   "open_at_maturity": {
+    "repaid": 0,
+    "rolled": 0,
+    "liquidated": 0,
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1285,14 +1357,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 6,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 6,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     4,
@@ -1316,18 +1390,20 @@
    "positions": 148,
    "matured": true,
    "outcomes": {
-    "repaid": 128,
+    "repaid": 122,
     "rolled": 2,
     "liquidated": 0,
-    "liquidated_late": 18,
-    "open": 0
+    "liquidated_late": 24,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 8,
+    "repaid": 2,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 18,
-    "open": 0
+    "liquidated_late": 24,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     11,
@@ -1355,14 +1431,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1390,14 +1468,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1425,14 +1505,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 1,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1460,14 +1542,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1495,14 +1579,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 1
+    "open": 1,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 1
+    "open": 1,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1530,14 +1616,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1565,14 +1653,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1596,18 +1686,20 @@
    "positions": 1,
    "matured": true,
    "outcomes": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 1,
+    "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
-    "liquidated_late": 0,
-    "open": 0
+    "liquidated_late": 1,
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     1,
@@ -1635,14 +1727,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1670,14 +1764,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1705,14 +1801,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1740,14 +1838,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1775,14 +1875,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1810,14 +1912,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 1
+    "open": 1,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 1
+    "open": 1,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1845,14 +1949,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1876,18 +1982,20 @@
    "positions": 599,
    "matured": false,
    "outcomes": {
-    "repaid": 256,
+    "repaid": 262,
     "rolled": 14,
-    "liquidated": 0,
+    "liquidated": 5,
     "liquidated_late": 0,
-    "open": 329
+    "open": 293,
+    "dust": 25
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 8,
     "rolled": 0,
-    "liquidated": 0,
+    "liquidated": 3,
     "liquidated_late": 0,
-    "open": 329
+    "open": 293,
+    "dust": 25
    },
    "late_minutes_hist": [
     0,
@@ -1915,14 +2023,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 3
+    "open": 3,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 3
+    "open": 3,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1950,14 +2060,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 1
+    "open": 1,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 1
+    "open": 1,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -1985,14 +2097,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2020,14 +2134,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2055,14 +2171,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2090,14 +2208,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 2
+    "open": 2,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 2
+    "open": 2,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2121,18 +2241,20 @@
    "positions": 682,
    "matured": false,
    "outcomes": {
-    "repaid": 182,
+    "repaid": 194,
     "rolled": 8,
-    "liquidated": 0,
+    "liquidated": 1,
     "liquidated_late": 0,
-    "open": 492
+    "open": 473,
+    "dust": 6
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 12,
     "rolled": 0,
-    "liquidated": 0,
+    "liquidated": 1,
     "liquidated_late": 0,
-    "open": 492
+    "open": 473,
+    "dust": 6
    },
    "late_minutes_hist": [
     0,
@@ -2160,14 +2282,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2191,18 +2315,20 @@
    "positions": 9,
    "matured": false,
    "outcomes": {
-    "repaid": 7,
+    "repaid": 8,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 2
+    "open": 1,
+    "dust": 0
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 2
+    "open": 1,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2226,18 +2352,20 @@
    "positions": 153,
    "matured": false,
    "outcomes": {
-    "repaid": 34,
+    "repaid": 35,
     "rolled": 3,
-    "liquidated": 1,
+    "liquidated": 3,
     "liquidated_late": 0,
-    "open": 115
+    "open": 106,
+    "dust": 6
    },
    "open_at_maturity": {
-    "repaid": 0,
+    "repaid": 1,
     "rolled": 0,
-    "liquidated": 0,
+    "liquidated": 2,
     "liquidated_late": 0,
-    "open": 115
+    "open": 106,
+    "dust": 6
    },
    "late_minutes_hist": [
     0,
@@ -2265,14 +2393,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2300,14 +2430,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2335,14 +2467,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 3
+    "open": 3,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 3
+    "open": 3,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2370,14 +2504,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2405,14 +2541,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2440,14 +2578,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 9
+    "open": 9,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 9
+    "open": 9,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2475,14 +2615,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2510,14 +2652,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2545,14 +2689,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2580,14 +2726,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2615,14 +2763,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2650,14 +2800,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2685,14 +2837,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2720,14 +2874,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,
@@ -2755,14 +2911,16 @@
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "open_at_maturity": {
     "repaid": 0,
     "rolled": 0,
     "liquidated": 0,
     "liquidated_late": 0,
-    "open": 0
+    "open": 0,
+    "dust": 0
    },
    "late_minutes_hist": [
     0,

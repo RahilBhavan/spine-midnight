@@ -7,8 +7,18 @@ the rest becomes credit; the seller first spends credit, the rest becomes debt. 
 badDebt) cut debt; Withdraw and UpdatePosition cut credit; ClaimContinuousFee cuts totalUnits. Each Take carries totalUnitsDelta = buyer credit increase -
 seller credit decrease, which checks the credit replay on every trade.
 
-Outcome of a position (market, borrower) = what removed its last debt: repaid (Repay, or buying units back), rolled
-(Repay called by BlueFallbackRolling), liquidated (normal mode, price), liquidated_late (postMaturityMode), or open.
+Outcome of a position (market, borrower) = the first debt cut after its last borrow that leaves at most the dust
+threshold: repaid (Repay, or buying units back), rolled (Repay called by BlueFallbackRolling), liquidated (normal mode,
+price), liquidated_late (postMaturityMode). Otherwise open (debt above dust remains) or dust (debt at most dust that
+nothing cut since the last borrow: a sub-dollar loan never repaid). A remainder left by the closing event is reported as
+dust_remainder, not as an open loan. The threshold applies to remainders, not to loan size: a $0.10 loan that was
+liquidated is labelled liquidated.
+
+Dust threshold (DUST_UNITS, in loan-token base units; a unit repays one asset at maturity): USDC 1,000,000 = $1.00;
+WETH 10**14 = 0.0001 ETH, under $1 for any ETH price below $10,000. $1 is below the memo's reporting precision (whole
+dollars) and below the cost of the repay or liquidation transaction a borrower or liquidator would send to clear it.
+Liquidators leave such remainders: in the Sept 25 cohort, 19 post-maturity liquidations left 52..773 units ($0.0001..
+$0.0008) each. Tokens not listed get no allowance: any remaining debt stays open.
 Late liquidations carry minutes past maturity and the implied penalty: LIF grows linearly from 1 at maturity to maxLif
 at maturity + TIME_TO_MAX_LIF (60 min), maxLif = 1 / (1 - cursor * (1 - lltv)) (ConstantsLib.sol).
 
@@ -28,7 +38,9 @@ WAD = 10 ** 18
 TIME_TO_MAX_LIF = 3600
 DEBT, CREDIT, TOTAL_UNITS = '93af51c2', 'ca286bb9', '53a6332b'  # debt(bytes32,address) credit(bytes32,address) totalUnits(bytes32)
 OUTCOME = {'repay': 'repaid', 'buyback': 'repaid', 'roll': 'rolled', 'liquidate': 'liquidated', 'liquidate_late': 'liquidated_late'}
-OUTCOMES = ['repaid', 'rolled', 'liquidated', 'liquidated_late', 'open']
+OUTCOMES = ['repaid', 'rolled', 'liquidated', 'liquidated_late', 'open', 'dust']
+USDC, WETH = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', '0x4200000000000000000000000000000000000006'
+DUST_UNITS = {USDC: 10 ** 6, WETH: 10 ** 14}
 LATE_BINS = list(range(0, 65, 5))  # minutes-late histogram edges; the last bin is 60+
 
 
@@ -106,6 +118,20 @@ def debt_at(p, ts):
     return next((d for t, d, _, _ in reversed(p['hist']) if t <= ts), 0)
 
 
+def dust_units(token):
+    """Largest remainder (loan-token base units) that does not count as open debt; see the module docstring."""
+    return DUST_UNITS.get(token.lower(), 0)
+
+
+def closing(p, dust):
+    """Index into p['hist'] of the closing event: the first debt cut after the last borrow that leaves at most dust.
+    -1 if debt is at most dust but nothing cut it since the last borrow (a dust loan never repaid); None if open."""
+    if p['debt'] > dust:
+        return None
+    last_borrow = max(j for j, h in enumerate(p['hist']) if h[2] == 'borrow')
+    return next((j for j in range(last_borrow + 1, len(p['hist'])) if p['hist'][j][1] <= dust), -1)
+
+
 def label(ev, now=None):
     """One row per position that ever borrowed. Rows are public chain data; the Coinbase split never lands here."""
     now = now or time.time()
@@ -116,16 +142,26 @@ def label(ev, now=None):
         if not any(k == 'borrow' for _, _, k, _ in p['hist']) or i not in mk:
             continue
         m, T = mk[i], mk[i]['maturity']
-        close = next((h for h in reversed(p['hist']) if h[1] == 0), None) if p['debt'] == 0 else None
-        late = next((h for h in p['hist'] if h[2] == 'liquidate_late'), None)
+        dust = dust_units(m['loan_token'])
+        k = closing(p, dust)
+        close = p['hist'][k] if k is not None and k >= 0 else None
+        outcome = 'open' if k is None else 'dust' if k < 0 else OUTCOME[close[2]]
+        lates = [h for h in p['hist'] if h[2] == 'liquidate_late']
+        late = lates[0] if lates else None
         out.append(dict(
             market=i, user=user, maturity=T, maturity_date=date(T), matured=T <= now, loan_token=m['loan_token'],
-            outcome=OUTCOME[close[2]] if close else 'open', closed_ts=close[0] if close else None,
+            outcome=outcome, closed_ts=close[0] if close else None,
             minutes_after_maturity=round((close[0] - T) / 60, 1) if close and close[0] > T else None,
+            peak_debt=str(max(h[1] for h in p['hist'])), borrowed=str(sum(
+                h[1] - (p['hist'][j - 1][1] if j else 0) for j, h in enumerate(p['hist']) if h[2] == 'borrow')),
             debt_minus_6h=str(debt_at(p, T - 6 * 3600)), debt_at_maturity=str(debt_at(p, T)),
             debt_plus_1h=str(debt_at(p, T + 3600)), debt_now=str(p['debt']),
+            dust_remainder=str(p['debt']) if outcome != 'open' and p['debt'] else None,
             late_minutes=round((late[0] - T) / 60, 1) if late else None,
-            late_penalty_pct=round(late_penalty(m, late[3]['collateral'], late[0] - T), 3) if late else None))
+            late_penalty_pct=round(late_penalty(m, late[3]['collateral'], late[0] - T), 3) if late else None,
+            late_repaid_units=str(sum(int(h[3]['repaid_units']) for h in lates)),
+            late_penalty_units=str(round(sum(int(h[3]['repaid_units']) * late_penalty(m, h[3]['collateral'], h[0] - T) / 100
+                                             for h in lates)))))
     return out
 
 

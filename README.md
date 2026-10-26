@@ -12,18 +12,16 @@ The 25 Sep 2026 maturity is the first published checkpoint. Counts come from `da
 
 | Outcome | Positions | Meaning |
 | :--- | ---: | :--- |
-| Repaid | 128 | The borrower repaid the debt or bought the units back. |
-| Rolled into Morpho Blue | 2 | `BlueFallbackRolling` moved the debt to a Morpho Blue loan. |
-| Liquidated after maturity | 18 | A liquidation in post-maturity mode removed the debt. |
-| Still open | 0 | Debt remained at the indexed block. |
-| **Total** | **148** | Every indexed position for this maturity, across 11 markets. |
+| Repaid | **122** | Debt was repaid without a classified roll. |
+| Rolled into Morpho Blue | **2** | The position moved into a Morpho Blue loan. |
+| Liquidated after maturity | **24** | A post-maturity liquidation cleared the debt: 18 within 10 minutes, 2 after 188 and 427 minutes, and 4 sub-dollar loans swept 13.4 days later. |
+| Still open | **0** | Debt above the dust threshold remained at the saved index. |
+| Dust loan, never repaid | **0** | Borrowed at most the dust threshold ($1) and never cut it. |
+| **Total** | **148** | All indexed positions for this maturity. |
 
-- The `Roll` event log has 3 roll events for this maturity.
-- 26 of the 148 positions still had debt at the maturity time: 8 later repaid, 18 were liquidated late, and none stayed open.
-- The same aggregate covers 79 maturity dates from 9 Jul 2026 to 31 Dec 2028. 51 of them had matured at the run.
-- These are position counts across the whole market. They are not a Coinbase wallet breakdown, current balances, or loss estimates.
+Source: [saved aggregate](data/midnight/maturity.json), relabelled with the dust rule from events indexed to Base block 53,074,299 (the 25 Oct 2026 index); the saved counts are as of that index. These are position counts across the market, not a Coinbase wallet breakdown. They describe the saved checkpoint; they are not current balances or estimates of losses.
 
-The 30 Oct 2026 maturity and the final two-maturity report are pending.
+**Correction (October 22, 2026).** The September 28 version of this table counted 20 positions as still open and 2 as liquidated after maturity. Liquidators leave sub-cent remainders (52 to 773 USDC units, at most $0.0008), and the old labeller treated any remainder as open debt. Outcomes are now set by the first debt cut after the last borrow that leaves at most a **$1 dust threshold** (`DUST_UNITS` in `spine/midnight.py`). 25 positions had a post-maturity liquidation and 24 ended with one; the 25th repaid to $0.011 four days before maturity, and only that remainder was liquidated. Little debt was left by maturity: $1,280 of USDC was owed at maturity (largest $1,002), although positions had peaked at about $1.85M combined before most were repaid early. Liquidation penalties paid on the cohort totalled $8.88.
 
 ## How it works
 
