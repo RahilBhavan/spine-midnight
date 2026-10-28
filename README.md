@@ -1,5 +1,6 @@
 # Spine Midnight: how Morpho Midnight fixed-maturity loans on Base end
 
+[![tests](https://github.com/RahilBhavan/spine-midnight/actions/workflows/tests.yml/badge.svg)](https://github.com/RahilBhavan/spine-midnight/actions/workflows/tests.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Spine Midnight is an independent study of Morpho Midnight, the fixed-maturity loan contract on Base. It reads public contract events, replays the debt of every borrow position, and counts how positions end at each maturity date: repaid, rolled into Morpho Blue, liquidated, or still open. It checks the replay against contract state on Base, Morpho Blue borrow receipts and DefiLlama. It is the companion to [Spine](https://github.com/RahilBhavan/spine), which tracks the Coinbase-linked Morpho Blue loan book on Base and backtests its liquidations. Spine Midnight applies the same approach to the fixed-maturity product.
@@ -64,7 +65,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m pytest -q tests
 ```
 
-Expected result: `11 passed` (observed on 25 Oct 2026 with Python 3.14.7). The tests run offline on a synthetic event log, the committed aggregate and recorded `eth_getLogs` fixtures (`tests/fixtures/base_logs.json`).
+Expected result: `25 passed` (observed on 28 Oct 2026 with Python 3.14). The tests run offline on a synthetic event log, the committed aggregate and recorded `eth_getLogs` fixtures (`tests/fixtures/base_logs.json`).
 
 To refresh the event index, rebuild the September aggregate, and run the checks:
 
@@ -110,7 +111,7 @@ Change the producer scripts rather than editing files in `data/midnight/`. Raw o
 - Public results are aggregate counts with no wallet-type split. They do not estimate any party's exposure or losses.
 - Wallet tags and live snapshots stay in the gitignored `private/` directory and are not part of this repository.
 - The draft page in `midnight/` is not deployed. It goes live only after the runbook's publication gate.
-- CI runs only the offline pytest suite (`.github/workflows/tests.yml`). It has not run on GitHub yet. The live maturity checks run by hand because they need network access.
+- CI runs only the offline pytest suite (`.github/workflows/tests.yml`); it passes on `main` (last run 26 Oct 2026). The live maturity checks run by hand because they need network access.
 
 ## License
 
