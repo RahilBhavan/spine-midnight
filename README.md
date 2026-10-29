@@ -55,17 +55,17 @@ The DefiLlama check leaves out loan tokens that DefiLlama does not price and pri
 
 ## Run it
 
-You need Python 3.12 or later. The scripts use only the standard library. The tests need `pytest`.
+You need Python 3.12 or later. The scripts use only the standard library. The tests need `pytest`, pinned in `requirements-dev.txt`.
 
 ```sh
 git clone https://github.com/RahilBhavan/spine-midnight.git
 cd spine-midnight
 python3.12 -m venv .venv
-.venv/bin/python -m pip install pytest
+.venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python -m pytest -q tests
 ```
 
-Expected result: `25 passed` (observed on 28 Oct 2026 with Python 3.14). The tests run offline on a synthetic event log, the committed aggregate and recorded `eth_getLogs` fixtures (`tests/fixtures/base_logs.json`).
+All tests should pass. The tests badge above shows the latest CI result, and CI installs from the same `requirements-dev.txt`. The tests run offline on a synthetic event log, the committed aggregate and recorded `eth_getLogs` fixtures (`tests/fixtures/base_logs.json`).
 
 To refresh the event index, rebuild the September aggregate, and run the checks:
 
@@ -88,6 +88,7 @@ Run `spine.fetch_midnight` before `spine.check_maturity`. The DefiLlama check co
 | `spine/` | Fetcher, replay and labels, checker, and the HTTP and wallet-tagging helpers copied from Spine. |
 | `data/midnight/` | Indexed event files, the RPC sweep marker and the aggregate `maturity.json`. The scripts generate these files. |
 | `tests/` | Pytest tests for the replay, labels, penalty rule, aggregate shape, block search, Blockscout fallback and Blockscout/RPC equivalence. |
+| `requirements-dev.txt` | Pinned pytest and its dependencies. CI installs from it. |
 | `midnight/` | `maturity.html`, a draft results page. It is marked `noindex` and is not deployed. |
 | `site/` | The stylesheet that the draft page uses. |
 
