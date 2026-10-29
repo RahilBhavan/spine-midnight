@@ -1,0 +1,9 @@
+# Pinned test dependencies for CI and local runs.
+# Regenerate: echo pytest | uv pip compile - --python-version 3.12 --universal --no-header --no-annotate -o requirements-dev.txt
+# Keep in step with [project.optional-dependencies] dev in pyproject.toml.
+colorama==0.4.6 ; sys_platform == 'win32'
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+pygments==2.21.0
+pytest==9.2.0
